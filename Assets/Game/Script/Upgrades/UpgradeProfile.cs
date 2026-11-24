@@ -9,7 +9,8 @@ namespace MilkMaker.Upgrades
         AutoMilker,
         MilkQuality,
         GlobalMultiplier,
-        BucketCapacity
+        BucketCapacity,
+        CowUnlock
     }
 
     [CreateAssetMenu(
@@ -41,6 +42,9 @@ namespace MilkMaker.Upgrades
 
         public string DisplayName => _displayName;
         public UpgradeType Type => _type;
+
+        public bool IsStallUpgrade =>
+            _type == UpgradeType.AutoMilker;
 
         public int MaxLevel =>
             _type == UpgradeType.MilkQuality

@@ -8,14 +8,22 @@ namespace MilkMaker.Upgrades
     [DisallowMultipleComponent]
     public sealed class UpgradeService : MonoBehaviour
     {
+        public const int MaxStalls = 8;
+        public const int GlobalId = -1;
+
         [Header("Dependencies")]
         [SerializeField] private MilkEconomy _economy;
 
         [Header("Catalog")]
         [SerializeField] private UpgradeProfile[] _profiles;
+        [SerializeField] private UpgradeProfile _newCowProfile;
 
-        private readonly Dictionary<UpgradeProfile, int> _levels =
+        private readonly Dictionary<
+            (UpgradeProfile Profile, int StallId), int> _levels =
             new();
+
+        private readonly double[] _stallPassiveBase =
+            new double[MaxStalls];
 
         private double _clickBonus;
         private double _passiveBase;
@@ -23,7 +31,16 @@ namespace MilkMaker.Upgrades
 
         public event Action<UpgradeProfile, int> OnUpgradePurchased;
 
+        public event Action<UpgradeProfile, int, int>
+            OnStallUpgradePurchased;
+
         public double GlobalMultiplier { get; private set; } = 1d;
+
+        public double BucketCapacityMultiplier
+        {
+            get;
+            private set;
+        } = 1d;
 
         public double ClickPower =>
             _economy != null && _economy.IsInitialized
@@ -46,25 +63,63 @@ namespace MilkMaker.Upgrades
 
             foreach (UpgradeProfile profile in _profiles)
             {
-                if (profile == null || _levels.ContainsKey(profile))
+                if (profile == null)
                     continue;
 
-                _levels.Add(profile, 0);
+                if (profile.IsStallUpgrade)
+                {
+                    for (int i = 0; i < MaxStalls; i++)
+                        _levels.TryAdd((profile, i), 0);
+                }
+                else
+                {
+                    _levels.TryAdd((profile, GlobalId), 0);
+                }
             }
+        }
+
+        public bool IsStallUnlocked(int stallId)
+        {
+            if (stallId < 0 || stallId >= MaxStalls)
+                return false;
+
+            return stallId <= GetLevel(_newCowProfile);
         }
 
         public int GetLevel(UpgradeProfile profile)
         {
+            return GetLevel(profile, GlobalId);
+        }
+
+        public int GetLevel(
+            UpgradeProfile profile,
+            int stallId)
+        {
             return profile != null &&
-                   _levels.TryGetValue(profile, out int level)
+                   _levels.TryGetValue(
+                       (profile, stallId), out int level)
                 ? level
                 : 0;
         }
 
         public double GetPrice(UpgradeProfile profile)
         {
+            return GetPrice(profile, GlobalId);
+        }
+
+        public double GetPrice(
+            UpgradeProfile profile,
+            int stallId)
+        {
             if (profile == null ||
-                !_levels.TryGetValue(profile, out int level))
+                !_levels.TryGetValue(
+                    (profile, stallId), out int level))
+            {
+                return double.PositiveInfinity;
+            }
+
+            if (profile.IsStallUpgrade &&
+                !IsStallUnlocked(stallId))
             {
                 return double.PositiveInfinity;
             }
@@ -74,11 +129,19 @@ namespace MilkMaker.Upgrades
 
         public bool CanPurchase(UpgradeProfile profile)
         {
-            return _economy != null &&
-                   _economy.CanAfford(GetPrice(profile));
+            return CanPurchase(profile, GlobalId);
         }
 
-        // Для UnityEvent и UI Button.
+        public bool CanPurchase(
+            UpgradeProfile profile,
+            int stallId)
+        {
+            return isActiveAndEnabled &&
+                   _economy != null &&
+                   _economy.CanAfford(
+                       GetPrice(profile, stallId));
+        }
+
         public void Buy(UpgradeProfile profile)
         {
             TryPurchase(profile);
@@ -86,17 +149,27 @@ namespace MilkMaker.Upgrades
 
         public bool TryPurchase(UpgradeProfile profile)
         {
+            return TryPurchase(profile, GlobalId);
+        }
+
+        public bool TryPurchase(
+            UpgradeProfile profile,
+            int stallId)
+        {
             if (_isPurchasing ||
-                !isActiveAndEnabled ||
-                _economy == null ||
-                profile == null ||
-                !_levels.TryGetValue(profile, out int level) ||
-                level >= profile.MaxLevel)
+                !CanPurchase(profile, stallId))
             {
                 return false;
             }
 
-            double price = profile.GetPrice(level);
+            var key = (profile, stallId);
+
+            int level = _levels[key];
+
+            if (level >= profile.MaxLevel)
+                return false;
+
+            double price = GetPrice(profile, stallId);
 
             _isPurchasing = true;
 
@@ -107,20 +180,28 @@ namespace MilkMaker.Upgrades
 
                 int nextLevel = level + 1;
 
-                _levels[profile] = nextLevel;
+                _levels[key] = nextLevel;
 
                 RecalculateStats();
 
-                OnUpgradePurchased?.Invoke(profile, nextLevel);
+                if (profile.IsStallUpgrade)
+                {
+                    OnStallUpgradePurchased?.Invoke(
+                        profile, stallId, nextLevel);
+                }
+                else
+                {
+                    OnUpgradePurchased?.Invoke(
+                        profile, nextLevel);
+                }
 
 #if UNITY_EDITOR
                 if (_debug)
                 {
                     Debug.Log(
                         $"[Upgrades] {profile.DisplayName} | " +
-                        $"Level: {nextLevel} | " +
-                        $"Click: {MilkFormatter.Format(ClickPower)} | " +
-                        $"Auto: {MilkFormatter.Format(PassiveIncome)}/s",
+                        $"Stall: {stallId} | " +
+                        $"Level: {nextLevel}",
                         this);
                 }
 #endif
@@ -133,6 +214,15 @@ namespace MilkMaker.Upgrades
             }
         }
 
+        public double GetStallPassiveIncome(int stallId)
+        {
+            if (!IsStallUnlocked(stallId))
+                return 0d;
+
+            return _stallPassiveBase[stallId] *
+                   GlobalMultiplier;
+        }
+
         private void RecalculateStats()
         {
             _clickBonus = 0d;
@@ -140,9 +230,15 @@ namespace MilkMaker.Upgrades
             GlobalMultiplier = 1d;
             BucketCapacityMultiplier = 1d;
 
+            Array.Clear(
+                _stallPassiveBase,
+                0,
+                _stallPassiveBase.Length);
+
             foreach (var entry in _levels)
             {
-                UpgradeProfile profile = entry.Key;
+                UpgradeProfile profile = entry.Key.Profile;
+                int stallId = entry.Key.StallId;
                 int level = entry.Value;
 
                 if (level == 0)
@@ -157,6 +253,7 @@ namespace MilkMaker.Upgrades
                         break;
 
                     case UpgradeType.AutoMilker:
+                        _stallPassiveBase[stallId] += effect;
                         _passiveBase += effect;
                         break;
 
@@ -168,39 +265,11 @@ namespace MilkMaker.Upgrades
                     case UpgradeType.BucketCapacity:
                         BucketCapacityMultiplier *= effect;
                         break;
+
+                    case UpgradeType.CowUnlock:
+                        break;
                 }
             }
         }
-        
-        public double GetPassiveSourceIncome(
-            UpgradeProfile profile,
-            int unitIndex = 0)
-        {
-            if (profile == null ||
-                profile.Type != UpgradeType.AutoMilker ||
-                unitIndex < 0)
-            {
-                return 0d;
-            }
-
-            int level = GetLevel(profile);
-
-            if (level <= 0 || unitIndex > level)
-                return 0d;
-
-            double income =
-                profile.GetEffect(level) * GlobalMultiplier;
-
-            return unitIndex == 0
-                ? income
-                : income / level;
-        }
-
-        public double BucketCapacityMultiplier
-        {
-            get;
-            private set;
-        } = 1d;
     }
 }
-

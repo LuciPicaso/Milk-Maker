@@ -23,10 +23,11 @@ namespace MilkMaker.Cow
         [Header("Slap Boost")]
         [SerializeField] private IncomeModifiers _modifiers;
         [SerializeField] private ModifierProfile _slapProfile;
-        [SerializeField] private UpgradeProfile[] _slapSources;
+        private int _stallId = -1;
 
-        [SerializeField, Min(0)]
-        private int _slapUnitIndex;
+        public int StallId => _stallId;
+
+        public BucketSocket BucketSocket => _bucketSocket;
 
 #if UNITY_EDITOR
         [Header("Debug")]
@@ -70,41 +71,35 @@ namespace MilkMaker.Cow
         public void Slap()
         {
             if (_modifiers != null &&
-                _slapProfile != null &&
-                _slapSources != null)
+                _slapProfile != null)
             {
-                for (int i = 0; i < _slapSources.Length; i++)
-                {
-                    _modifiers.TryActivateCowBoost(
-                        _slapSources[i],
-                        _slapUnitIndex,
-                        _slapProfile);
-                }
+                _modifiers.TryActivateCowBoost(
+                    _stallId,
+                    _slapProfile);
             }
 
             _onSlapped.Invoke();
 
-#if UNITY_EDITOR
-            if (_debug)
+        #if UNITY_EDITOR
+            if (_debug && _modifiers != null)
             {
                 Debug.Log(
-                    $"[Cow] Slapped | Passive: " +
-                    $"{MilkFormatter.Format(_modifiers != null ? _modifiers.GetPassiveIncome():0d)}/s",this);
+                    $"[Cow {_stallId + 1}] Slapped | " +
+                    $"Income: {MilkFormatter.Format(_modifiers.GetStallPassiveIncome(_stallId))}/s"
+                    ,this);
             }
-#endif
+        #endif
         }
 
-        public void InitializeAdditionalCow(
+        public void InitializeCow(
             ItemHolder holder,
             IncomeModifiers modifiers,
             ModifierProfile slapProfile,
-            UpgradeProfile source,
-            int unitIndex)
+            int stallId)
         {
             _modifiers = modifiers;
             _slapProfile = slapProfile;
-            _slapSources = new[] { source };
-            _slapUnitIndex = unitIndex;
+            _stallId = stallId;
 
             if (_bucketSocket != null)
                 _bucketSocket.BindHolder(holder);

@@ -56,6 +56,19 @@ namespace MilkMaker.Farm
                 Refresh();
         }
 
+        public CowStall GetStall(int stallId)
+        {
+            if (_stalls == null ||
+                stallId < 0 ||
+                stallId >= _stalls.Length ||
+                stallId >= MaxCows)
+            {
+                return null;
+            }
+
+            return _stalls[stallId];
+        }
+
         private void Refresh()
         {
             if (_upgrades == null ||
@@ -69,37 +82,39 @@ namespace MilkMaker.Farm
                 return;
             }
 
-            int purchased =
-                _upgrades.GetLevel(_newCowProfile);
-
             int count = Mathf.Min(
-                purchased + 1,
-                MaxCows,
-                _stalls.Length);
+                _stalls.Length,
+                MaxCows);
 
-            // Стойло 0 уже содержит стартовую корову.
-            for (int i = 1; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 CowStall stall = _stalls[i];
 
-                if (stall == null || stall.IsOccupied)
+                if (stall == null)
                     continue;
 
-                CowInteraction cow =
-                    stall.Spawn(_cowPrefab);
+                stall.BindId(i);
+
+                if (!_upgrades.IsStallUnlocked(i))
+                    continue;
+
+                bool wasOccupied = stall.IsOccupied;
+
+                CowInteraction cow = wasOccupied
+                    ? stall.Cow
+                    : stall.Spawn(_cowPrefab);
 
                 if (cow == null)
                     continue;
 
-                cow.InitializeAdditionalCow(
+                cow.InitializeCow(
                     _holder,
                     _modifiers,
                     _slapProfile,
-                    _newCowProfile,
                     i);
 
 #if UNITY_EDITOR
-                if (_debug)
+                if (_debug && !wasOccupied)
                 {
                     Debug.Log(
                         $"[FarmCowSpawner] Cow {i + 1} spawned.",

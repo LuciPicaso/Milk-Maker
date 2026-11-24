@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using MilkMaker.Upgrades;
 using UnityEngine;
 using MilkMaker.Economy;
@@ -24,105 +23,79 @@ namespace MilkMaker.Modifiers
             System.Math.Max(
                 0d,
                 _globalBoostExpireTime - Time.timeAsDouble);
+        
+        private readonly double[] _slapExpireTimes =
+            new double[UpgradeService.MaxStalls];
 
-        private struct CowBoost
+        private readonly double[] _slapMultipliers =
+            new double[UpgradeService.MaxStalls];
+
+        public bool IsCowBoostActive(int stallId)
         {
-            public UpgradeProfile Source;
-            public int UnitIndex;
-            public double Multiplier;
-            public double ExpireTime;
+            return stallId >= 0 &&
+                stallId < UpgradeService.MaxStalls &&
+                Time.timeAsDouble < _slapExpireTimes[stallId];
         }
 
-        private readonly List<CowBoost> _cowBoosts =
-            new(16);
+        public double GetCowBoostRemaining(int stallId)
+        {
+            if (!IsCowBoostActive(stallId))
+                return 0d;
+
+            return System.Math.Max(
+                0d,
+                _slapExpireTimes[stallId] - Time.timeAsDouble);
+        }
 
         public bool TryActivateCowBoost(
-            UpgradeProfile source,
-            int unitIndex,
+            int stallId,
             ModifierProfile profile)
         {
-            if (_upgrades == null ||
-                source == null ||
+            if (!isActiveAndEnabled ||
+                _upgrades == null ||
                 profile == null ||
-                !profile.IsValid)
+                !profile.IsValid ||
+                !_upgrades.IsStallUnlocked(stallId))
             {
                 return false;
             }
 
-            if (_upgrades.GetPassiveSourceIncome(
-                    source, unitIndex) <= 0d)
-            {
+            if (_upgrades.GetStallPassiveIncome(stallId) <= 0d)
                 return false;
-            }
 
-            double now = Time.timeAsDouble;
+            _slapMultipliers[stallId] = profile.Multiplier;
 
-            RemoveExpiredBoosts(now);
+            _slapExpireTimes[stallId] =
+                Time.timeAsDouble + profile.Duration;
 
-            var boost = new CowBoost
-            {
-                Source = source,
-                UnitIndex = unitIndex,
-                Multiplier = profile.Multiplier,
-                ExpireTime = now + profile.Duration
-            };
-
-            for (int i = 0; i < _cowBoosts.Count; i++)
-            {
-                CowBoost active = _cowBoosts[i];
-
-                if (active.Source != source)
-                    continue;
-
-                // Повторный шлепок — обновление таймера.
-                if (active.UnitIndex == unitIndex)
-                {
-                    _cowBoosts[i] = boost;
-                    return true;
-                }
-
-                // Запрещаем одновременно усиливать
-                // весь источник и отдельную его единицу.
-                if (active.UnitIndex == 0 || unitIndex == 0)
-                    return false;
-            }
-
-            _cowBoosts.Add(boost);
             return true;
+        }
+
+        public double GetStallPassiveIncome(int stallId)
+        {
+            if (_upgrades == null ||
+                !_upgrades.IsStallUnlocked(stallId))
+            {
+                return 0d;
+            }
+
+            double slapMultiplier = IsCowBoostActive(stallId)
+                ? _slapMultipliers[stallId]
+                : 1d;
+
+            return _upgrades.GetStallPassiveIncome(stallId) *
+                slapMultiplier *
+                GlobalBoostMultiplier;
         }
 
         public double GetPassiveIncome()
         {
-            if (_upgrades == null)
-                return 0d;
+            double income = 0d;
 
-            RemoveExpiredBoosts(Time.timeAsDouble);
+            for (int i = 0; i < UpgradeService.MaxStalls; i++)
+                income += GetStallPassiveIncome(i);
 
-            double income = _upgrades.PassiveIncome;
-
-            for (int i = 0; i < _cowBoosts.Count; i++)
-            {
-                CowBoost boost = _cowBoosts[i];
-
-                double sourceIncome =
-                    _upgrades.GetPassiveSourceIncome(
-                        boost.Source,
-                        boost.UnitIndex);
-
-                income += sourceIncome *
-                          (boost.Multiplier - 1d);
-            }
-
-            return income * GlobalBoostMultiplier;
-        }
-
-        private void RemoveExpiredBoosts(double now)
-        {
-            for (int i = _cowBoosts.Count - 1; i >= 0; i--)
-            {
-                if (now >= _cowBoosts[i].ExpireTime)
-                    _cowBoosts.RemoveAt(i);
-            }
+            return income;
         }
 
         public bool TryPurchaseGlobalBoost(

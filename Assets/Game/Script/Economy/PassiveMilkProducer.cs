@@ -1,3 +1,4 @@
+using MilkMaker.Farm;
 using MilkMaker.Items;
 using MilkMaker.Modifiers;
 using MilkMaker.Production;
@@ -15,7 +16,7 @@ namespace MilkMaker.Economy
         [SerializeField] private UpgradeService _upgrades;
 
         [Header("Production")]
-        [SerializeField] private BucketSocket _bucketSocket;
+        [SerializeField] private FarmCowSpawner _farm;
         [SerializeField] private MilkConveyor _conveyor;
 
         [Header("Automation Unlocks")]
@@ -26,84 +27,95 @@ namespace MilkMaker.Economy
 
         public double PendingMilk => _pendingMilk;
 
-        public bool IsAutomaticDeliveryUnlocked
+        public bool IsAutomaticDeliveryUnlocked(int stallId)
         {
-            get
+            if (_upgrades == null ||
+                _automaticDeliveryUnlocks == null)
             {
-                if (_upgrades == null ||
-                    _automaticDeliveryUnlocks == null)
-                {
-                    return false;
-                }
-
-                foreach (UpgradeProfile profile
-                         in _automaticDeliveryUnlocks)
-                {
-                    if (profile != null &&
-                        _upgrades.GetLevel(profile) > 0)
-                    {
-                        return true;
-                    }
-                }
-
                 return false;
             }
+
+            foreach (UpgradeProfile profile
+                     in _automaticDeliveryUnlocks)
+            {
+                if (profile != null &&
+                    _upgrades.GetLevel(profile, stallId) > 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void Update()
         {
             if (_economy == null ||
                 !_economy.IsInitialized ||
-                _modifiers == null)
+                _modifiers == null ||
+                _farm == null ||
+                _upgrades == null)
             {
                 return;
             }
 
-            double produced =
-                _modifiers.GetPassiveIncome() *
-                Time.deltaTime;
+            double deltaTime = Time.deltaTime;
 
-            if (double.IsNaN(produced) ||
-                double.IsInfinity(produced) ||
-                produced <= 0d)
+            for (int i = 0; i < UpgradeService.MaxStalls; i++)
             {
-                return;
+                CowStall stall = _farm.GetStall(i);
+
+                if (stall == null ||
+                    !stall.IsOccupied ||
+                    !_upgrades.IsStallUnlocked(i))
+                {
+                    continue;
+                }
+
+                double produced =
+                    _modifiers.GetStallPassiveIncome(i) *
+                    deltaTime;
+
+                if (double.IsNaN(produced) ||
+                    double.IsInfinity(produced) ||
+                    produced <= 0d)
+                {
+                    continue;
+                }
+
+                if (IsAutomaticDeliveryUnlocked(i))
+                {
+                    _pendingMilk += produced;
+                }
+                else
+                {
+                    ProduceIntoBucket(stall, produced);
+                }
             }
 
-            if (IsAutomaticDeliveryUnlocked)
+            if (_conveyor != null &&
+                _pendingMilk >= 1d &&
+                _conveyor.TrySendAutomatic(_pendingMilk))
             {
-                ProduceAutomatically(produced);
-                return;
+                _pendingMilk = 0d;
             }
-
-            ProduceIntoBucket(produced);
         }
 
-        private void ProduceIntoBucket(double amount)
+        private static void ProduceIntoBucket(
+            CowStall stall,
+            double amount)
         {
-            if (_bucketSocket == null)
+            BucketSocket socket = stall.Cow.BucketSocket;
+
+            if (socket == null)
                 return;
 
-            Bucket bucket = _bucketSocket.OccupiedBucket;
+            Bucket bucket = socket.OccupiedBucket;
 
             if (bucket == null || bucket.IsFull)
                 return;
 
             bucket.AddMilk(amount);
-        }
-
-        private void ProduceAutomatically(double amount)
-        {
-            _pendingMilk += amount;
-
-            if (_conveyor == null ||
-                _pendingMilk < 1d)
-            {
-                return;
-            }
-
-            if (_conveyor.TrySendAutomatic(_pendingMilk))
-                _pendingMilk = 0d;
         }
     }
 }

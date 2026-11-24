@@ -14,6 +14,13 @@ namespace MilkMaker.Farm
 
         public bool IsOccupied => _cow != null;
 
+        public int StallId { get; private set; } = -1;
+
+        internal void BindId(int stallId)
+        {
+            StallId = stallId;
+        }
+
         public CowInteraction Spawn(CowInteraction prefab)
         {
             if (IsOccupied)
