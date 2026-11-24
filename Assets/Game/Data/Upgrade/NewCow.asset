@@ -20,7 +20,4 @@ MonoBehaviour:
   _valuePerLevel: 1500000
   _milestoneStep: 10
   _milestoneMultiplier: 2
-  _qualityMultipliers:
-  - 5
-  - 25
-  - 100
+  _qualityMultipliers: []

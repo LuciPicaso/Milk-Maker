@@ -163,40 +163,12 @@ MonoBehaviour:
   _bucketSocket: {fileID: 6346244174694738055}
   _onMilked:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6037572728261000055}
-        m_TargetAssemblyTypeName: MilkMaker.Interaction.InteractionTarget, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _onSlapped:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 148651481681407391}
-        m_TargetAssemblyTypeName: MilkMaker.Interaction.InteractionTarget, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _modifiers: {fileID: 0}
   _slapProfile: {fileID: 11400000, guid: ac3dad4e6a95fd3418aef31ac6217d4d, type: 2}
-  _slapSources:
-  - {fileID: 11400000, guid: ab9ed97768956de468133ea3ad10d708, type: 2}
-  - {fileID: 11400000, guid: 0d79f4ca03182f049ad3bf62c0fb93e1, type: 2}
-  _slapUnitIndex: 0
   _debug: 1
 --- !u!1 &4953193988764618998
 GameObject:
