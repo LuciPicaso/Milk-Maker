@@ -353,19 +353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Farm.FarmExpander
   _upgrades: {fileID: 1751063947}
   _entries:
-  - Profile: {fileID: 11400000, guid: ab9ed97768956de468133ea3ad10d708, type: 2}
-    RequiredLevel: 1
-    Target: {fileID: 0}
-  - Profile: {fileID: 11400000, guid: 0d79f4ca03182f049ad3bf62c0fb93e1, type: 2}
-    RequiredLevel: 1
-    Target: {fileID: 0}
-  - Profile: {fileID: 11400000, guid: 965b65616e3df6847936b92e277f6c79, type: 2}
-    RequiredLevel: 1
-    Target: {fileID: 0}
   - Profile: {fileID: 11400000, guid: 67cf2d3b854bc5848ae40ac9b399f425, type: 2}
-    RequiredLevel: 1
-    Target: {fileID: 141544607}
-  - Profile: {fileID: 11400000, guid: fd02fef52235db647af9ce829b7e7364, type: 2}
     RequiredLevel: 1
     Target: {fileID: 141544607}
   _debug: 1
@@ -525,6 +513,7 @@ GameObject:
   - component: {fileID: 498537534}
   - component: {fileID: 498537533}
   - component: {fileID: 498537532}
+  - component: {fileID: 498537536}
   m_Layer: 0
   m_Name: BullHelper
   m_TagString: Untagged
@@ -562,13 +551,13 @@ MonoBehaviour:
   _onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1751063947}
-        m_TargetAssemblyTypeName: MilkMaker.Upgrades.UpgradeService, Assembly-CSharp
+      - m_Target: {fileID: 498537536}
+        m_TargetAssemblyTypeName: MilkMaker.Upgrades.StallUpgradeStation, Assembly-CSharp
         m_MethodName: Buy
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: ab9ed97768956de468133ea3ad10d708, type: 2}
-          m_ObjectArgumentAssemblyTypeName: MilkMaker.Upgrades.UpgradeProfile, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -652,6 +641,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498537530}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &498537536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498537530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1505c7e947c59e84d96122112805846c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Upgrades.StallUpgradeStation
+  _upgrades: {fileID: 1751063947}
+  _stall: {fileID: 891734588}
+  _profile: {fileID: 11400000, guid: ab9ed97768956de468133ea3ad10d708, type: 2}
 --- !u!1 &508862762
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +669,7 @@ GameObject:
   - component: {fileID: 508862766}
   - component: {fileID: 508862765}
   - component: {fileID: 508862764}
+  - component: {fileID: 508862768}
   m_Layer: 0
   m_Name: MilkCollider
   m_TagString: Untagged
@@ -702,13 +707,13 @@ MonoBehaviour:
   _onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1751063947}
-        m_TargetAssemblyTypeName: MilkMaker.Upgrades.UpgradeService, Assembly-CSharp
+      - m_Target: {fileID: 508862768}
+        m_TargetAssemblyTypeName: MilkMaker.Upgrades.StallUpgradeStation, Assembly-CSharp
         m_MethodName: Buy
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 965b65616e3df6847936b92e277f6c79, type: 2}
-          m_ObjectArgumentAssemblyTypeName: MilkMaker.Upgrades.UpgradeProfile, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -792,6 +797,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 508862762}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &508862768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508862762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1505c7e947c59e84d96122112805846c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Upgrades.StallUpgradeStation
+  _upgrades: {fileID: 1751063947}
+  _stall: {fileID: 891734588}
+  _profile: {fileID: 11400000, guid: 965b65616e3df6847936b92e277f6c79, type: 2}
 --- !u!1 &563109952
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,7 +876,7 @@ Transform:
   m_GameObject: {fileID: 570578915}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.62, y: 1.69, z: -0.13499928}
+  m_LocalPosition: {x: -3.227, y: 2.07, z: -0.13499928}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1331,6 +1351,7 @@ GameObject:
   - component: {fileID: 891756874}
   - component: {fileID: 891756873}
   - component: {fileID: 891756872}
+  - component: {fileID: 891756876}
   m_Layer: 0
   m_Name: MilkingMachine
   m_TagString: Untagged
@@ -1368,13 +1389,13 @@ MonoBehaviour:
   _onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1751063947}
-        m_TargetAssemblyTypeName: MilkMaker.Upgrades.UpgradeService, Assembly-CSharp
+      - m_Target: {fileID: 891756876}
+        m_TargetAssemblyTypeName: MilkMaker.Upgrades.StallUpgradeStation, Assembly-CSharp
         m_MethodName: Buy
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 0d79f4ca03182f049ad3bf62c0fb93e1, type: 2}
-          m_ObjectArgumentAssemblyTypeName: MilkMaker.Upgrades.UpgradeProfile, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1458,6 +1479,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 891756870}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &891756876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891756870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1505c7e947c59e84d96122112805846c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Upgrades.StallUpgradeStation
+  _upgrades: {fileID: 1751063947}
+  _stall: {fileID: 891734588}
+  _profile: {fileID: 11400000, guid: 0d79f4ca03182f049ad3bf62c0fb93e1, type: 2}
 --- !u!1 &993734132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,7 +1541,7 @@ MonoBehaviour:
   _economy: {fileID: 1944014007}
   _modifiers: {fileID: 2106861457}
   _upgrades: {fileID: 1751063947}
-  _farm: {fileID: 0}
+  _farm: {fileID: 1546472419}
   _conveyor: {fileID: 1781446135}
   _automaticDeliveryUnlocks:
   - {fileID: 11400000, guid: 0d79f4ca03182f049ad3bf62c0fb93e1, type: 2}
@@ -1519,7 +1555,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 998913589}
-  - component: {fileID: 998913590}
   m_Layer: 0
   m_Name: UpgradeStations
   m_TagString: Untagged
@@ -1545,21 +1580,6 @@ Transform:
   - {fileID: 891756871}
   m_Father: {fileID: 891734589}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &998913590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 998913588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1505c7e947c59e84d96122112805846c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Upgrades.StallUpgradeStation
-  _upgrades: {fileID: 1751063947}
-  _stall: {fileID: 891734588}
-  _profile: {fileID: 0}
 --- !u!1 &1086938668
 GameObject:
   m_ObjectHideFlags: 0
