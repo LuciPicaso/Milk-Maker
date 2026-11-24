@@ -66,6 +66,32 @@ namespace MilkMaker.Production
             ResetVisual();
         }
 
+        public bool TryEnqueueMilk(double amount)
+        {
+            if (!isActiveAndEnabled ||
+                _economy == null ||
+                !_economy.IsInitialized ||
+                double.IsNaN(amount) ||
+                double.IsInfinity(amount) ||
+                amount <= 0d)
+            {
+                return false;
+            }
+
+            double next = _bufferedMilk + amount;
+
+            if (double.IsNaN(next) ||
+                double.IsInfinity(next) ||
+                next <= _bufferedMilk)
+            {
+                return false;
+            }
+
+            _bufferedMilk = next;
+
+            return true;
+        }
+
         public bool TrySend(Bucket bucket)
         {
             if (bucket == null ||
