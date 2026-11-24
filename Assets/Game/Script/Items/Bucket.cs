@@ -7,6 +7,10 @@ namespace MilkMaker.Items
     [DisallowMultipleComponent]
     public sealed class Bucket : MonoBehaviour
     {
+#if UNITY_EDITOR
+        [Header("Debug")]
+        [SerializeField] private bool _debug;
+#endif
         [Header("Milk Storage")]
         [SerializeField] private double _capacity = 10d;
         [SerializeField] private UpgradeService _upgrades;
@@ -117,6 +121,16 @@ namespace MilkMaker.Items
             MilkAmount = 0d;
 
             OnMilkChanged?.Invoke(MilkAmount);
+
+#if UNITY_EDITOR
+            if (_debug)
+            {
+                Debug.Log(
+                    $"[Bucket] Poured: {amount:F2} L | " +
+                    $"Remaining: {MilkAmount:F2} / {Capacity:F2} L",
+                    this);
+            }
+#endif
 
             return amount;
         }

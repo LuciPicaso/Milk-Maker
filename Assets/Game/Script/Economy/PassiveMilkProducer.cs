@@ -23,10 +23,6 @@ namespace MilkMaker.Economy
         [SerializeField]
         private UpgradeProfile[] _automaticDeliveryUnlocks;
 
-        private double _pendingMilk;
-
-        public double PendingMilk => _pendingMilk;
-
         public bool IsAutomaticDeliveryUnlocked(int stallId)
         {
             if (_upgrades == null ||
@@ -85,19 +81,13 @@ namespace MilkMaker.Economy
 
                 if (IsAutomaticDeliveryUnlocked(i))
                 {
-                    _pendingMilk += produced;
+                    if (_conveyor != null)
+                        _conveyor.TryEnqueueMilk(produced);
                 }
                 else
                 {
                     ProduceIntoBucket(stall, produced);
                 }
-            }
-
-            if (_conveyor != null &&
-                _pendingMilk >= 1d &&
-                _conveyor.TrySendAutomatic(_pendingMilk))
-            {
-                _pendingMilk = 0d;
             }
         }
 

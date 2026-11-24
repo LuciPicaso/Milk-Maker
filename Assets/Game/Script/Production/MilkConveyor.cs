@@ -32,6 +32,10 @@ namespace MilkMaker.Production
         [SerializeField]
         private UnityEvent _onDelivered = new();
 
+        private double _bufferedMilk;
+
+        public double BufferedMilk => _bufferedMilk;
+
         private double _pendingMilk;
         private float _elapsed;
 
@@ -43,42 +47,6 @@ namespace MilkMaker.Production
         [Header("Debug")]
         [SerializeField] private bool _debug;
 #endif
-        
-        public bool TrySendAutomatic(double amount)
-        {
-            if (!isActiveAndEnabled ||
-                _economy == null ||
-                !_economy.IsInitialized ||
-                IsBusy ||
-                Time.timeAsDouble < _nextAutomaticDispatchTime ||
-                double.IsNaN(amount) ||
-                double.IsInfinity(amount) ||
-                amount <= 0d)
-            {
-                return false;
-            }
-
-            IsBusy = true;
-            _elapsed = 0f;
-            _pendingMilk = amount;
-
-            ResetVisual();
-
-            _onDispatched.Invoke();
-
-        #if UNITY_EDITOR
-            if (_debug)
-            {
-                Debug.Log(
-                    $"[Conveyor] Auto dispatched: " +
-                    $"{MilkFormatter.Format(amount)} L",
-                    this);
-            }
-        #endif
-
-            return true;
-        }
-
         private void Awake()
         {
             if (_economy == null ||
@@ -100,40 +68,29 @@ namespace MilkMaker.Production
 
         public bool TrySend(Bucket bucket)
         {
-            if (!isActiveAndEnabled ||
-                !_economy.IsInitialized ||
-                IsBusy ||
-                bucket == null ||
+            if (bucket == null ||
                 !bucket.IsHeld ||
                 bucket.IsEmpty)
             {
                 return false;
             }
 
-            IsBusy = true;
-            _elapsed = 0f;
-
-            _pendingMilk = bucket.DrainMilk();
-
-            if (_pendingMilk <= 0d)
-            {
-                IsBusy = false;
+            if (!TryEnqueueMilk(bucket.MilkAmount))
                 return false;
-            }
 
-            ResetVisual();
+            double amount = bucket.DrainMilk();
 
-            _onDispatched.Invoke();
-
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
             if (_debug)
             {
                 Debug.Log(
-                    $"[Conveyor] Dispatched: " +
-                    $"{MilkFormatter.Format(_pendingMilk)} L",
+                    $"[Conveyor] Bucket received: " +
+                    $"{MilkFormatter.Format(amount)} L | " +
+                    $"Buffered: {MilkFormatter.Format(_bufferedMilk)} L | " +
+                    $"Busy: {IsBusy}",
                     this);
             }
-#endif
+        #endif
 
             return true;
         }
@@ -141,7 +98,10 @@ namespace MilkMaker.Production
         private void Update()
         {
             if (!IsBusy)
+            {
+                DispatchBufferedMilk();
                 return;
+            }
 
             _elapsed += Time.deltaTime;
 
@@ -155,6 +115,36 @@ namespace MilkMaker.Production
 
             if (progress >= 1f)
                 Deliver();
+        }
+
+        private void DispatchBufferedMilk()
+        {
+            if (IsBusy ||
+                _bufferedMilk <= 0d ||
+                Time.timeAsDouble < _nextAutomaticDispatchTime)
+            {
+                return;
+            }
+
+            _pendingMilk = _bufferedMilk;
+            _bufferedMilk = 0d;
+
+            IsBusy = true;
+            _elapsed = 0f;
+
+            ResetVisual();
+
+            _onDispatched.Invoke();
+
+        #if UNITY_EDITOR
+            if (_debug)
+            {
+                Debug.Log(
+                    $"[Conveyor] Dispatched: " +
+                    $"{MilkFormatter.Format(_pendingMilk)} L",
+                    this);
+            }
+        #endif
         }
 
         private void Deliver()
