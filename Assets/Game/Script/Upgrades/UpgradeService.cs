@@ -166,5 +166,30 @@ namespace MilkMaker.Upgrades
                 }
             }
         }
+        
+        public double GetPassiveSourceIncome(
+            UpgradeProfile profile,
+            int unitIndex = 0)
+        {
+            if (profile == null ||
+                profile.Type != UpgradeType.AutoMilker ||
+                unitIndex < 0)
+            {
+                return 0d;
+            }
+
+            int level = GetLevel(profile);
+
+            if (level <= 0 || unitIndex > level)
+                return 0d;
+
+            double income =
+                profile.GetEffect(level) * GlobalMultiplier;
+
+            return unitIndex == 0
+                ? income
+                : income / level;
+        }
     }
 }
+

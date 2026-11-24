@@ -1,5 +1,6 @@
 using MilkMaker.Upgrades;
 using UnityEngine;
+using MilkMaker.Modifiers;
 
 namespace MilkMaker.Economy
 {
@@ -7,7 +8,7 @@ namespace MilkMaker.Economy
     public sealed class PassiveMilkProducer : MonoBehaviour
     {
         [SerializeField] private MilkEconomy _economy;
-        [SerializeField] private UpgradeService _upgrades;
+        [SerializeField] private IncomeModifiers _modifiers;
 
         [SerializeField, Min(0.01f)]
         private float _tickInterval = 0.25f;
@@ -19,14 +20,16 @@ namespace MilkMaker.Economy
         {
             if (_economy == null ||
                 !_economy.IsInitialized ||
-                _upgrades == null)
+                _modifiers == null)
             {
                 return;
             }
 
             double deltaTime = Time.deltaTime;
 
-            _pendingMilk += _upgrades.PassiveIncome * deltaTime;
+            _pendingMilk +=
+                _modifiers.GetPassiveIncome() * deltaTime;
+
             _elapsed += deltaTime;
 
             if (_elapsed < _tickInterval)
