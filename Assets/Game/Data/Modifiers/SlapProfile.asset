@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SlapProfile
   m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Modifiers.ModifierProfile
   _multiplier: 2
-  _duration: 8
+  _duration: 20

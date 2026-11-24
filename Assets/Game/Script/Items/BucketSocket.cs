@@ -56,5 +56,10 @@ namespace MilkMaker.Items
 
             return true;
         }
+
+        public void BindHolder(ItemHolder holder)
+        {
+            _holder = holder;
+        }
     }
 }

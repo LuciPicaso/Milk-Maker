@@ -93,5 +93,21 @@ namespace MilkMaker.Cow
             }
 #endif
         }
+
+        public void InitializeAdditionalCow(
+            ItemHolder holder,
+            IncomeModifiers modifiers,
+            ModifierProfile slapProfile,
+            UpgradeProfile source,
+            int unitIndex)
+        {
+            _modifiers = modifiers;
+            _slapProfile = slapProfile;
+            _slapSources = new[] { source };
+            _slapUnitIndex = unitIndex;
+
+            if (_bucketSocket != null)
+                _bucketSocket.BindHolder(holder);
+        }
     }
 }
