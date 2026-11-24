@@ -1,6 +1,7 @@
 using MilkMaker.Economy;
 using UnityEngine;
 using UnityEngine.Events;
+using MilkMaker.Upgrades;
 
 namespace MilkMaker.Cow
 {
@@ -9,6 +10,7 @@ namespace MilkMaker.Cow
     {
         [Header("Dependencies")]
         [SerializeField] private MilkEconomy _economy;
+        [SerializeField] private UpgradeService _upgrades;
 
         [Header("Presentation")]
         [SerializeField]
@@ -30,7 +32,10 @@ namespace MilkMaker.Cow
                 return;
             }
 
-            double amount = _economy.Profile.BaseClickPower;
+            if (_upgrades == null)
+                return;
+
+            double amount = _upgrades.ClickPower;
 
             if (!_economy.AddMilk(amount))
                 return;
