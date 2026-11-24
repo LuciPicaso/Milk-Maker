@@ -1,0 +1,75 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+
+    <Style src="../StallUpgrade/StallUpgradePanel.uss" />
+
+    <ui:VisualElement class="panel">
+
+        <ui:VisualElement class="display">
+
+            <ui:Label text="FARM MANAGEMENT"
+                      class="cow-name" />
+
+            <ui:Label text="TOTAL PRODUCTION"
+                      class="caption" />
+
+            <ui:Label name="income"
+                      text="0 L/s"
+                      class="income" />
+
+            <ui:Label name="cow-count"
+                      text="COWS UNLOCKED: 1 / 8"
+                      class="status" />
+
+        </ui:VisualElement>
+
+        <ui:VisualElement name="upgrade-0" class="upgrade-row">
+            <ui:VisualElement class="upgrade-info">
+                <ui:Label name="upgrade-name" text="HAND LUBRICANT" class="upgrade-name" />
+                <ui:Label name="level" text="LEVEL 0" class="level" />
+            </ui:VisualElement>
+            <ui:Label name="price" text="--" class="price" />
+            <ui:Label text="+" class="buy" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="upgrade-1" class="upgrade-row">
+            <ui:VisualElement class="upgrade-info">
+                <ui:Label name="upgrade-name" text="BUCKET CAPACITY" class="upgrade-name" />
+                <ui:Label name="level" text="LEVEL 0" class="level" />
+            </ui:VisualElement>
+            <ui:Label name="price" text="--" class="price" />
+            <ui:Label text="+" class="buy" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="upgrade-2" class="upgrade-row">
+            <ui:VisualElement class="upgrade-info">
+                <ui:Label name="upgrade-name" text="NEW COW" class="upgrade-name" />
+                <ui:Label name="level" text="1 / 8" class="level" />
+            </ui:VisualElement>
+            <ui:Label name="price" text="--" class="price" />
+            <ui:Label text="+" class="buy" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="upgrade-3" class="upgrade-row">
+            <ui:VisualElement class="upgrade-info">
+                <ui:Label name="upgrade-name" text="MILK QUALITY" class="upgrade-name" />
+                <ui:Label name="level" text="LEVEL 0" class="level" />
+            </ui:VisualElement>
+            <ui:Label name="price" text="--" class="price" />
+            <ui:Label text="+" class="buy" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="upgrade-4" class="upgrade-row">
+            <ui:VisualElement class="upgrade-info">
+                <ui:Label name="upgrade-name" text="BLACK HOLE" class="upgrade-name" />
+                <ui:Label name="level" text="LEVEL 0" class="level" />
+            </ui:VisualElement>
+            <ui:Label name="price" text="--" class="price" />
+            <ui:Label text="+" class="buy" />
+        </ui:VisualElement>
+
+        <ui:Label text="COW MAFIA INDUSTRIES"
+                  class="footer" />
+
+    </ui:VisualElement>
+
+</ui:UXML>
