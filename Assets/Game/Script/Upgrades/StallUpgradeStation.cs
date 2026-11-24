@@ -9,6 +9,9 @@ namespace MilkMaker.Upgrades
         [SerializeField] private UpgradeService _upgrades;
         [SerializeField] private CowStall _stall;
         [SerializeField] private UpgradeProfile _profile;
+        public UpgradeProfile Profile => _profile;
+
+        public CowStall Stall => _stall;
 
         public void Buy()
         {

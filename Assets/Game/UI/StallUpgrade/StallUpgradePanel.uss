@@ -1,0 +1,134 @@
+.panel {
+    width: 100%;
+    height: 100%;
+
+    background-color: #292c27;
+
+    padding: 14px;
+
+    border-width: 4px;
+    border-color: #596052;
+
+    color: #d7dfd0;
+}
+
+.display {
+    background-color: #121b10;
+
+    border-width: 3px;
+    border-color: #56634c;
+
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cow-name {
+    font-size: 22px;
+    color: #a4d38a;
+    -unity-font-style: bold;
+}
+
+.status {
+    font-size: 15px;
+    color: #a4d38a;
+}
+
+.caption {
+    font-size: 14px;
+    color: #7c9c6d;
+    margin-top: 8px;
+}
+
+.income {
+    font-size: 38px;
+    color: #b5ec91;
+    -unity-font-style: bold;
+}
+
+.slap-timer {
+    font-size: 16px;
+    color: #88937f;
+}
+
+.slap-active {
+    color: #e5ca7d;
+}
+
+.upgrade-row {
+    flex-direction: row;
+    align-items: center;
+
+    background-color: #383d34;
+
+    padding: 10px;
+    margin-bottom: 7px;
+
+    min-height: 60px;
+}
+
+.upgrade-info {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.upgrade-name {
+    font-size: 17px;
+    -unity-font-style: bold;
+}
+
+.level {
+    font-size: 14px;
+    color: #9ba794;
+}
+
+.price {
+    min-width: 95px;
+
+    background-color: #151d12;
+
+    padding: 8px;
+    margin-right: 10px;
+
+    font-size: 17px;
+
+    -unity-text-align: middle-center;
+}
+
+.available {
+    color: #b5ec91;
+}
+
+.unavailable {
+    color: #e27969;
+}
+
+.buy {
+    width: 38px;
+    height: 38px;
+
+    background-color: #776039;
+
+    border-width: 2px;
+    border-color: #a28b5c;
+
+    color: #ead8b3;
+
+    font-size: 26px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+.footer {
+    flex-grow: 1;
+
+    color: #88937f;
+    font-size: 12px;
+
+    -unity-text-align: lower-center;
+}

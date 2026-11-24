@@ -1,0 +1,100 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+
+    <Style src="StallUpgradePanel.uss" />
+
+    <ui:VisualElement class="panel">
+
+        <ui:VisualElement class="display">
+
+            <ui:VisualElement class="header">
+                <ui:Label name="cow-name"
+                          text="COW 01"
+                          class="cow-name" />
+
+                <ui:Label name="status"
+                          text="ONLINE"
+                          class="status" />
+            </ui:VisualElement>
+
+            <ui:Label text="PRODUCTION"
+                      class="caption" />
+
+            <ui:Label name="income"
+                      text="0 L/s"
+                      class="income" />
+
+            <ui:Label name="slap-timer"
+                      text="SLAP INACTIVE"
+                      class="slap-timer" />
+
+        </ui:VisualElement>
+
+        <ui:VisualElement name="upgrade-0"
+                          class="upgrade-row">
+
+            <ui:VisualElement class="upgrade-info">
+                <ui:Label name="upgrade-name"
+                          text="BULL HELPER"
+                          class="upgrade-name" />
+
+                <ui:Label name="level"
+                          text="LEVEL 0"
+                          class="level" />
+            </ui:VisualElement>
+
+            <ui:Label name="price"
+                      text="100 L"
+                      class="price" />
+
+            <ui:Label text="+" class="buy" />
+
+        </ui:VisualElement>
+
+        <ui:VisualElement name="upgrade-1"
+                          class="upgrade-row">
+
+            <ui:VisualElement class="upgrade-info">
+                <ui:Label name="upgrade-name"
+                          text="MILKING MACHINE"
+                          class="upgrade-name" />
+
+                <ui:Label name="level"
+                          text="LEVEL 0"
+                          class="level" />
+            </ui:VisualElement>
+
+            <ui:Label name="price"
+                      text="2.5 K L"
+                      class="price" />
+
+            <ui:Label text="+" class="buy" />
+
+        </ui:VisualElement>
+
+        <ui:VisualElement name="upgrade-2"
+                          class="upgrade-row">
+
+            <ui:VisualElement class="upgrade-info">
+                <ui:Label name="upgrade-name"
+                          text="MILK COLLIDER"
+                          class="upgrade-name" />
+
+                <ui:Label name="level"
+                          text="LEVEL 0"
+                          class="level" />
+            </ui:VisualElement>
+
+            <ui:Label name="price"
+                      text="500 B L"
+                      class="price" />
+
+            <ui:Label text="+" class="buy" />
+
+        </ui:VisualElement>
+
+        <ui:Label text="COW MAFIA INDUSTRIES"
+                  class="footer" />
+
+    </ui:VisualElement>
+
+</ui:UXML>
