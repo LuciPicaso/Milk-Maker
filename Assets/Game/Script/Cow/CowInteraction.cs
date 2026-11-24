@@ -11,7 +11,6 @@ namespace MilkMaker.Cow
     {
         [Header("Dependencies")]
         [SerializeField] private MilkEconomy _economy;
-        [SerializeField] private UpgradeService _upgrades;
 
         [Header("Presentation")]
         [SerializeField]
@@ -41,10 +40,10 @@ namespace MilkMaker.Cow
                 return;
             }
 
-            if (_upgrades == null)
+            if (_modifiers == null)
                 return;
 
-            double amount = _upgrades.ClickPower;
+            double amount = _modifiers.GetClickPower();
 
             if (!_economy.AddMilk(amount))
                 return;

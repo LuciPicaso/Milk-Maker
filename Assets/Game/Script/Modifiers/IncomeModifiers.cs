@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using MilkMaker.Upgrades;
 using UnityEngine;
+using MilkMaker.Economy;
 
 namespace MilkMaker.Modifiers
 {
@@ -8,6 +9,21 @@ namespace MilkMaker.Modifiers
     public sealed class IncomeModifiers : MonoBehaviour
     {
         [SerializeField] private UpgradeService _upgrades;
+
+        private double _globalBoostMultiplier = 1d;
+        private double _globalBoostExpireTime;
+        private bool _isPurchasingGlobalBoost;
+
+        public bool IsGlobalBoostActive =>
+            Time.timeAsDouble < _globalBoostExpireTime;
+
+        public double GlobalBoostMultiplier =>
+            IsGlobalBoostActive ? _globalBoostMultiplier : 1d;
+
+        public double GlobalBoostRemaining =>
+            System.Math.Max(
+                0d,
+                _globalBoostExpireTime - Time.timeAsDouble);
 
         private struct CowBoost
         {
@@ -97,7 +113,7 @@ namespace MilkMaker.Modifiers
                           (boost.Multiplier - 1d);
             }
 
-            return income;
+            return income * GlobalBoostMultiplier;
         }
 
         private void RemoveExpiredBoosts(double now)
@@ -107,6 +123,51 @@ namespace MilkMaker.Modifiers
                 if (now >= _cowBoosts[i].ExpireTime)
                     _cowBoosts.RemoveAt(i);
             }
+        }
+
+        public bool TryPurchaseGlobalBoost(
+            MilkEconomy economy,
+            ModifierProfile profile,
+            double price)
+        {
+            if (!isActiveAndEnabled ||
+                _isPurchasingGlobalBoost ||
+                IsGlobalBoostActive ||
+                economy == null ||
+                profile == null ||
+                !profile.IsValid)
+            {
+                return false;
+            }
+
+            double multiplier = profile.Multiplier;
+            float duration = profile.Duration;
+
+            _isPurchasingGlobalBoost = true;
+
+            try
+            {
+                if (!economy.TrySpend(price))
+                    return false;
+
+                _globalBoostMultiplier = multiplier;
+                _globalBoostExpireTime =
+                    Time.timeAsDouble + duration;
+
+                return true;
+            }
+            finally
+            {
+                _isPurchasingGlobalBoost = false;
+            }
+        }
+
+        public double GetClickPower()
+        {
+            if (_upgrades == null)
+                return 0d;
+
+            return _upgrades.ClickPower * GlobalBoostMultiplier;
         }
     }
 }
