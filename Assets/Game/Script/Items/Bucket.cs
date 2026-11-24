@@ -1,10 +1,32 @@
 using UnityEngine;
+using System;
 
 namespace MilkMaker.Items
 {
     [DisallowMultipleComponent]
     public sealed class Bucket : MonoBehaviour
     {
+        [Header("Milk Storage")]
+        [SerializeField] private double _capacity = 10d;
+
+        public double MilkAmount { get; private set; }
+
+        public double Capacity => _capacity;
+
+        public double RemainingCapacity =>
+            Math.Max(0d, Capacity - MilkAmount);
+
+        public bool IsFull => RemainingCapacity <= 0d;
+
+        public bool IsEmpty => MilkAmount <= 0d;
+
+        public float Fill01 =>
+            Capacity > 0d
+                ? Mathf.Clamp01((float)(MilkAmount / Capacity))
+                : 0f;
+
+        public event Action<double> OnMilkChanged;
+
         [SerializeField] private ItemHolder _holder;
         [SerializeField] private Collider _interactionCollider;
 
@@ -48,6 +70,35 @@ namespace MilkMaker.Items
 
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
+        }
+
+        public double AddMilk(double amount)
+        {
+            if (double.IsNaN(amount) ||
+                double.IsInfinity(amount) ||
+                amount <= 0d ||
+                double.IsNaN(Capacity) ||
+                double.IsInfinity(Capacity) ||
+                Capacity <= 0d ||
+                IsFull)
+            {
+                return 0d;
+            }
+
+            double previousAmount = MilkAmount;
+
+            MilkAmount = Math.Min(
+                Capacity,
+                MilkAmount + amount);
+
+            double accepted = MilkAmount - previousAmount;
+
+            if (accepted <= 0d)
+                return 0d;
+
+            OnMilkChanged?.Invoke(MilkAmount);
+
+            return accepted;
         }
     }
 }

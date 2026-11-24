@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using MilkMaker.Upgrades;
 using MilkMaker.Modifiers;
+using MilkMaker.Items;
 
 namespace MilkMaker.Cow
 {
@@ -10,7 +11,7 @@ namespace MilkMaker.Cow
     public sealed class CowInteraction : MonoBehaviour
     {
         [Header("Dependencies")]
-        [SerializeField] private MilkEconomy _economy;
+        [SerializeField] private BucketSocket _bucketSocket;
 
         [Header("Presentation")]
         [SerializeField]
@@ -34,18 +35,22 @@ namespace MilkMaker.Cow
 
         public void Milk()
         {
-            if (_economy == null ||
-                !_economy.IsInitialized)
+            if (_modifiers == null ||
+                _bucketSocket == null)
             {
                 return;
             }
 
-            if (_modifiers == null)
+            Bucket bucket = _bucketSocket.OccupiedBucket;
+
+            if (bucket == null || bucket.IsFull)
                 return;
 
             double amount = _modifiers.GetClickPower();
 
-            if (!_economy.AddMilk(amount))
+            double accepted = bucket.AddMilk(amount);
+
+            if (accepted <= 0d)
                 return;
 
             _onMilked.Invoke();
@@ -54,8 +59,9 @@ namespace MilkMaker.Cow
             if (_debug)
             {
                 Debug.Log(
-                    $"[Cow] Milked: +{amount} | " +
-                    $"Balance: {MilkFormatter.Format(_economy.Balance)}",
+                    $"[Cow] Milked: +{MilkFormatter.Format(accepted)} | " +
+                    $"Bucket: {MilkFormatter.Format(bucket.MilkAmount)} / " +
+                    $"{MilkFormatter.Format(bucket.Capacity)} L",
                     this);
             }
 #endif
