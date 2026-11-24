@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using MilkMaker.Upgrades;
 
 namespace MilkMaker.Items
 {
@@ -8,10 +9,15 @@ namespace MilkMaker.Items
     {
         [Header("Milk Storage")]
         [SerializeField] private double _capacity = 10d;
+        [SerializeField] private UpgradeService _upgrades;
 
         public double MilkAmount { get; private set; }
 
-        public double Capacity => _capacity;
+        public double Capacity =>
+            _capacity * (
+                _upgrades != null
+                    ? _upgrades.BucketCapacityMultiplier
+                    : 1d);
 
         public double RemainingCapacity =>
             Math.Max(0d, Capacity - MilkAmount);

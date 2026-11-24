@@ -1312,7 +1312,7 @@ GameObject:
   - component: {fileID: 1533568141}
   - component: {fileID: 1533568140}
   m_Layer: 0
-  m_Name: BuyHandLubricant
+  m_Name: Bucket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1353,7 +1353,7 @@ MonoBehaviour:
         m_MethodName: Buy
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 17597735005191e45bc54bce71a816d3, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: e2fde3941a24afc4e944da93f27348fa, type: 2}
           m_ObjectArgumentAssemblyTypeName: MilkMaker.Upgrades.UpgradeProfile, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1481,6 +1481,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fd02fef52235db647af9ce829b7e7364, type: 2}
   - {fileID: 11400000, guid: 965b65616e3df6847936b92e277f6c79, type: 2}
   - {fileID: 11400000, guid: 67cf2d3b854bc5848ae40ac9b399f425, type: 2}
+  - {fileID: 11400000, guid: e2fde3941a24afc4e944da93f27348fa, type: 2}
   _debug: 1
 --- !u!4 &1751063948
 Transform:
@@ -1996,6 +1997,10 @@ PrefabInstance:
       propertyPath: _holder
       value: 
       objectReference: {fileID: 6903757904468829267}
+    - target: {fileID: 6461873879369309099, guid: a4ab9d9fc40354740b9e0cc59174638a, type: 3}
+      propertyPath: _upgrades
+      value: 
+      objectReference: {fileID: 1751063947}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

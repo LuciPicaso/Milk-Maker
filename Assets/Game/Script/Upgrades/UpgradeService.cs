@@ -138,6 +138,7 @@ namespace MilkMaker.Upgrades
             _clickBonus = 0d;
             _passiveBase = 0d;
             GlobalMultiplier = 1d;
+            BucketCapacityMultiplier = 1d;
 
             foreach (var entry in _levels)
             {
@@ -162,6 +163,10 @@ namespace MilkMaker.Upgrades
                     case UpgradeType.MilkQuality:
                     case UpgradeType.GlobalMultiplier:
                         GlobalMultiplier *= effect;
+                        break;
+
+                    case UpgradeType.BucketCapacity:
+                        BucketCapacityMultiplier *= effect;
                         break;
                 }
             }
@@ -190,6 +195,12 @@ namespace MilkMaker.Upgrades
                 ? income
                 : income / level;
         }
+
+        public double BucketCapacityMultiplier
+        {
+            get;
+            private set;
+        } = 1d;
     }
 }
 

@@ -8,7 +8,8 @@ namespace MilkMaker.Upgrades
         ClickPower,
         AutoMilker,
         MilkQuality,
-        GlobalMultiplier
+        GlobalMultiplier,
+        BucketCapacity
     }
 
     [CreateAssetMenu(
@@ -76,6 +77,7 @@ namespace MilkMaker.Upgrades
                         : 1d;
 
                 case UpgradeType.GlobalMultiplier:
+                case UpgradeType.BucketCapacity:
                     return Math.Pow(_valuePerLevel, level);
 
                 default:
