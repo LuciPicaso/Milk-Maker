@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace MilkMaker.Interaction
@@ -9,8 +8,9 @@ namespace MilkMaker.Interaction
     {
         [SerializeField] private Camera _camera;
         [SerializeField] private LayerMask _raycastMask = ~0;
+
         [SerializeField, Min(0.1f)]
-        private float _maxDistance = 100f;
+        private float _maxDistance = 2.5f;
 
         private void LateUpdate()
         {
@@ -19,18 +19,14 @@ namespace MilkMaker.Interaction
             if (_camera == null || mouse == null)
                 return;
 
+            if (Cursor.lockState != CursorLockMode.Locked)
+                return;
+
             if (!mouse.leftButton.wasPressedThisFrame)
                 return;
 
-            if (EventSystem.current != null &&
-                EventSystem.current.IsPointerOverGameObject(
-                    mouse.deviceId))
-            {
-                return;
-            }
-
-            Ray ray = _camera.ScreenPointToRay(
-                mouse.position.ReadValue());
+            Ray ray = _camera.ViewportPointToRay(
+                new Vector3(0.5f, 0.5f, 0f));
 
             if (!Physics.Raycast(
                     ray,
