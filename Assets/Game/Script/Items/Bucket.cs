@@ -100,5 +100,19 @@ namespace MilkMaker.Items
 
             return accepted;
         }
+
+        internal double DrainMilk()
+        {
+            if (IsEmpty)
+                return 0d;
+
+            double amount = MilkAmount;
+
+            MilkAmount = 0d;
+
+            OnMilkChanged?.Invoke(MilkAmount);
+
+            return amount;
+        }
     }
 }
