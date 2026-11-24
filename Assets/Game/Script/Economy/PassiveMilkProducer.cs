@@ -1,20 +1,54 @@
+using MilkMaker.Items;
+using MilkMaker.Modifiers;
+using MilkMaker.Production;
 using MilkMaker.Upgrades;
 using UnityEngine;
-using MilkMaker.Modifiers;
 
 namespace MilkMaker.Economy
 {
     [DisallowMultipleComponent]
     public sealed class PassiveMilkProducer : MonoBehaviour
     {
+        [Header("Dependencies")]
         [SerializeField] private MilkEconomy _economy;
         [SerializeField] private IncomeModifiers _modifiers;
+        [SerializeField] private UpgradeService _upgrades;
 
-        [SerializeField, Min(0.01f)]
-        private float _tickInterval = 0.25f;
+        [Header("Production")]
+        [SerializeField] private BucketSocket _bucketSocket;
+        [SerializeField] private MilkConveyor _conveyor;
+
+        [Header("Automation Unlocks")]
+        [SerializeField]
+        private UpgradeProfile[] _automaticDeliveryUnlocks;
 
         private double _pendingMilk;
-        private double _elapsed;
+
+        public double PendingMilk => _pendingMilk;
+
+        public bool IsAutomaticDeliveryUnlocked
+        {
+            get
+            {
+                if (_upgrades == null ||
+                    _automaticDeliveryUnlocks == null)
+                {
+                    return false;
+                }
+
+                foreach (UpgradeProfile profile
+                         in _automaticDeliveryUnlocks)
+                {
+                    if (profile != null &&
+                        _upgrades.GetLevel(profile) > 0)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        }
 
         private void Update()
         {
@@ -25,22 +59,50 @@ namespace MilkMaker.Economy
                 return;
             }
 
-            double deltaTime = Time.deltaTime;
+            double produced =
+                _modifiers.GetPassiveIncome() *
+                Time.deltaTime;
 
-            _pendingMilk +=
-                _modifiers.GetPassiveIncome() * deltaTime;
+            if (double.IsNaN(produced) ||
+                double.IsInfinity(produced) ||
+                produced <= 0d)
+            {
+                return;
+            }
 
-            _elapsed += deltaTime;
+            if (IsAutomaticDeliveryUnlocked)
+            {
+                ProduceAutomatically(produced);
+                return;
+            }
 
-            if (_elapsed < _tickInterval)
+            ProduceIntoBucket(produced);
+        }
+
+        private void ProduceIntoBucket(double amount)
+        {
+            if (_bucketSocket == null)
                 return;
 
-            _elapsed %= _tickInterval;
+            Bucket bucket = _bucketSocket.OccupiedBucket;
 
-            if (_pendingMilk <= 0d)
+            if (bucket == null || bucket.IsFull)
                 return;
 
-            if (_economy.AddMilk(_pendingMilk))
+            bucket.AddMilk(amount);
+        }
+
+        private void ProduceAutomatically(double amount)
+        {
+            _pendingMilk += amount;
+
+            if (_conveyor == null ||
+                _pendingMilk < 1d)
+            {
+                return;
+            }
+
+            if (_conveyor.TrySendAutomatic(_pendingMilk))
                 _pendingMilk = 0d;
         }
     }
