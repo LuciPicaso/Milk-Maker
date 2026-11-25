@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba4e8959ef6566041ba5e0313fd52329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Items.Bucket
-  _debug: 0
+  _debug: 1
   _capacity: 10
   _upgrades: {fileID: 0}
   _holder: {fileID: 0}

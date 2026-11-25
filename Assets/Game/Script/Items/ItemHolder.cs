@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace MilkMaker.Items
 {
@@ -6,6 +7,10 @@ namespace MilkMaker.Items
     public sealed class ItemHolder : MonoBehaviour
     {
         [SerializeField] private Transform _holdAnchor;
+
+        [Header("Presentation")]
+        [SerializeField] private UnityEvent _onPickedUp = new();
+        [SerializeField] private UnityEvent _onPlaced = new();
 
         public Bucket HeldBucket { get; private set; }
 
@@ -33,6 +38,8 @@ namespace MilkMaker.Items
 
             bucket.AttachToHand(_holdAnchor);
 
+            _onPickedUp.Invoke();
+
             return true;
         }
 
@@ -45,6 +52,8 @@ namespace MilkMaker.Items
                 return false;
 
             HeldBucket = null;
+
+            _onPlaced.Invoke();
 
             return true;
         }
