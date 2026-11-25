@@ -1,0 +1,34 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+
+    <Style src="FarmStatus.uss" />
+
+    <ui:VisualElement class="hud" picking-mode="Ignore">
+
+        <ui:Label text="MILK BALANCE"
+                  class="caption" />
+
+        <ui:Label name="balance"
+                  text="0 L"
+                  class="balance" />
+
+        <ui:VisualElement class="separator" />
+
+        <ui:VisualElement class="line">
+
+            <ui:Label text="BUCKET"
+                      class="caption" />
+
+            <ui:Label name="bucket-amount"
+                      text="0 / 10 L"
+                      class="value" />
+
+        </ui:VisualElement>
+
+        <ui:VisualElement class="progress-track">
+            <ui:VisualElement name="bucket-fill"
+                              class="progress-fill" />
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

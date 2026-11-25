@@ -1,0 +1,59 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+
+    <Style src="FarmStatus.uss" />
+
+    <ui:VisualElement class="debt-board">
+
+        <ui:Label text="COW MAFIA — DEBT TERMINAL"
+                  class="board-title" />
+
+        <ui:VisualElement class="display">
+
+            <ui:Label text="OUTSTANDING DEBT"
+                      class="caption centered" />
+
+            <ui:Label name="remaining-debt"
+                      text="0 L"
+                      class="debt-value" />
+
+            <ui:VisualElement class="separator" />
+
+            <ui:VisualElement class="line">
+
+                <ui:Label text="BALANCE"
+                          class="caption" />
+
+                <ui:Label name="balance"
+                          text="0 L"
+                          class="value" />
+
+            </ui:VisualElement>
+
+            <ui:VisualElement class="line">
+
+                <ui:Label text="TARGET"
+                          class="caption" />
+
+                <ui:Label name="target"
+                          text="0 L"
+                          class="value" />
+
+            </ui:VisualElement>
+
+            <ui:VisualElement class="progress-track debt-track">
+                <ui:VisualElement name="debt-fill"
+                                  class="progress-fill" />
+            </ui:VisualElement>
+
+            <ui:Label name="debt-percent"
+                      text="0.00%"
+                      class="percentage" />
+
+        </ui:VisualElement>
+
+        <ui:Label text="PAY YOUR DEBT. EARN YOUR FREEDOM."
+                  class="footer" />
+
+    </ui:VisualElement>
+
+</ui:UXML>

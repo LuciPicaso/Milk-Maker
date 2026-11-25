@@ -108,13 +108,13 @@ namespace MilkMaker.Economy
 
 #if UNITY_EDITOR
 
-        [ContextMenu("Debug/Add 100000 Milk")]
+        [ContextMenu("Debug/Add 10000000000 Milk")]
         private void DebugAddMilk()
         {
             if (!Application.isPlaying)
                 return;
 
-            AddMilk(100000d);
+            AddMilk(100000000000000d);
 
             Debug.Log(
                 $"[MilkEconomy] Balance: " +
