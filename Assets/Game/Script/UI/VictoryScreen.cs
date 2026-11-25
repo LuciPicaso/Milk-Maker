@@ -2,6 +2,7 @@ using MilkMaker.Economy;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using UnityEngine.Events;
 
 namespace MilkMaker.UI
 {
@@ -9,6 +10,9 @@ namespace MilkMaker.UI
     [RequireComponent(typeof(UIDocument))]
     public sealed class VictoryScreen : MonoBehaviour
     {
+        [Header("Presentation")]
+        [SerializeField] private UnityEvent _onVictory = new();
+
         [Header("Dependencies")]
         [SerializeField] private MilkEconomy _economy;
 
@@ -121,6 +125,8 @@ namespace MilkMaker.UI
             UnityEngine.Cursor.visible = true;
 
             _screen.style.display = DisplayStyle.Flex;
+
+            _onVictory.Invoke();
 
 #if UNITY_EDITOR
             if (_debug)

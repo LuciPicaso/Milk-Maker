@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using MilkMaker.Economy;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace MilkMaker.Upgrades
 {
@@ -10,6 +11,9 @@ namespace MilkMaker.Upgrades
     {
         public const int MaxStalls = 8;
         public const int GlobalId = -1;
+
+        [Header("Presentation")]
+        [SerializeField] private UnityEvent _onPurchased = new();
 
         [Header("Dependencies")]
         [SerializeField] private MilkEconomy _economy;
@@ -194,6 +198,8 @@ namespace MilkMaker.Upgrades
                     OnUpgradePurchased?.Invoke(
                         profile, nextLevel);
                 }
+
+                _onPurchased.Invoke();
 
 #if UNITY_EDITOR
                 if (_debug)

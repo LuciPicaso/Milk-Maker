@@ -2,12 +2,16 @@ using MilkMaker.Economy;
 using MilkMaker.Modifiers;
 using MilkMaker.Upgrades;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace MilkMaker.Pig
 {
     [DisallowMultipleComponent]
     public sealed class PigDealer : MonoBehaviour
     {
+        [SerializeField] private UnityEvent _onOfferOpened = new();
+        [SerializeField] private UnityEvent _onPillPurchased = new();
+
         private enum DealerState
         {
             Waiting,
@@ -127,6 +131,8 @@ namespace MilkMaker.Pig
 
             _offerVisual.SetActive(true);
 
+            _onOfferOpened.Invoke();
+
 #if UNITY_EDITOR
             if (_debug)
             {
@@ -169,6 +175,8 @@ namespace MilkMaker.Pig
 #endif
 
             ScheduleNextOffer();
+            
+            _onPillPurchased.Invoke();
         }
 
         private void ScheduleNextOffer()
