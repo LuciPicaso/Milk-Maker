@@ -7,6 +7,8 @@ namespace MilkMaker.Items
     [DisallowMultipleComponent]
     public sealed class Bucket : MonoBehaviour
     {
+        public UpgradeService Upgrades => _upgrades;
+        
 #if UNITY_EDITOR
         [Header("Debug")]
         [SerializeField] private bool _debug;
