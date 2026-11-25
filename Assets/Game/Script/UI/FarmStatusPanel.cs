@@ -3,6 +3,7 @@ using MilkMaker.Economy;
 using MilkMaker.Items;
 using UnityEngine;
 using UnityEngine.UIElements;
+using MilkMaker.Modifiers;
 
 namespace MilkMaker.UI
 {
@@ -13,10 +14,17 @@ namespace MilkMaker.UI
         [Header("Dependencies")]
         [SerializeField] private MilkEconomy _economy;
         [SerializeField] private Bucket _bucket;
+        [SerializeField] private IncomeModifiers _modifiers;
 
         [Header("Refresh")]
         [SerializeField, Min(0.05f)]
         private float _refreshInterval = 0.2f;
+
+        private VisualElement _boostBanner;
+        private VisualElement _boostFill;
+
+        private Label _boostMultiplier;
+        private Label _boostTimer;
 
         private UIDocument _document;
         private VisualElement _root;
@@ -69,6 +77,7 @@ namespace MilkMaker.UI
 
             RefreshEconomy();
             RefreshBucket();
+            RefreshBoost();
         }
 
         private void Bind(VisualElement root)
@@ -92,6 +101,18 @@ namespace MilkMaker.UI
 
             _bucketFill =
                 root.Q<VisualElement>("bucket-fill");
+
+            _boostBanner =
+                root.Q<VisualElement>("boost-banner");
+
+            _boostFill =
+                root.Q<VisualElement>("boost-fill");
+
+            _boostMultiplier =
+                root.Q<Label>("boost-multiplier");
+
+            _boostTimer =
+                root.Q<Label>("boost-timer");
 
             _lastBalance = double.NaN;
             _lastTarget = double.NaN;
@@ -190,6 +211,50 @@ namespace MilkMaker.UI
             {
                 _bucketFill.style.width =
                     Length.Percent(_bucket.Fill01 * 100f);
+            }
+        }
+
+        private void RefreshBoost()
+        {
+            if (_boostBanner == null)
+                return;
+
+            bool active =
+                _modifiers != null &&
+                _modifiers.IsGlobalBoostActive;
+
+            _boostBanner.EnableInClassList(
+                "boost-active",
+                active);
+
+            if (!active)
+                return;
+
+            double remaining =
+                _modifiers.GlobalBoostRemaining;
+
+            if (_boostMultiplier != null)
+            {
+                _boostMultiplier.text =
+                    $"BOOST x{_modifiers.GlobalBoostMultiplier:0.##}";
+            }
+
+            if (_boostTimer != null)
+            {
+                _boostTimer.text =
+                    $"{Math.Ceiling(remaining)} s";
+            }
+
+            float duration =
+                _modifiers.GlobalBoostDuration;
+
+            if (_boostFill != null && duration > 0f)
+            {
+                float progress = Mathf.Clamp01(
+                    (float)(remaining / duration));
+
+                _boostFill.style.width =
+                    Length.Percent(progress * 100f);
             }
         }
     }

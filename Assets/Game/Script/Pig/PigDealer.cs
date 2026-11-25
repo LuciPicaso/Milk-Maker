@@ -34,6 +34,24 @@ namespace MilkMaker.Pig
             _state == DealerState.Trading &&
             Time.timeAsDouble < _nextStateTime;
 
+        public PigDealerProfile Profile => _profile;
+
+        public double OfferRemaining =>
+            IsOfferOpen
+                ? System.Math.Max(
+                    0d,
+                    _nextStateTime - Time.timeAsDouble)
+                : 0d;
+
+        public bool CanBuyPill =>
+            isActiveAndEnabled &&
+            IsOfferOpen &&
+            _economy != null &&
+            _modifiers != null &&
+            _modifiers.isActiveAndEnabled &&
+            !_modifiers.IsGlobalBoostActive &&
+            _economy.CanAfford(OfferPrice);
+
 #if UNITY_EDITOR
         [Header("Debug")]
         [SerializeField] private bool _debug;

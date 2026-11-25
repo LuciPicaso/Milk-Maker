@@ -1,0 +1,57 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+
+    <Style src="../FarmStatus/FarmStatus.uss" />
+
+    <ui:VisualElement class="debt-board">
+
+        <ui:Label text="PIG DEALER"
+                  class="board-title" />
+
+        <ui:VisualElement class="display">
+
+            <ui:Label text="SPECIAL MILK PILLS"
+                      class="caption" />
+
+            <ui:Label name="multiplier"
+                      text="x10 INCOME"
+                      class="balance" />
+
+            <ui:Label name="duration"
+                      text="Duration: 12 s"
+                      class="caption" />
+
+            <ui:VisualElement class="separator" />
+
+            <ui:VisualElement class="line">
+
+                <ui:Label text="PRICE"
+                          class="caption" />
+
+                <ui:Label name="price"
+                          text="0 L"
+                          class="value" />
+
+            </ui:VisualElement>
+
+            <ui:VisualElement class="separator" />
+
+            <ui:Label name="offer-timer"
+                      text="OFFER EXPIRES: 8 s"
+                      class="offer-timer" />
+
+            <ui:VisualElement class="progress-track">
+
+                <ui:VisualElement name="offer-fill"
+                                  class="progress-fill offer-fill" />
+
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+        <ui:Label name="purchase-status"
+                  text="BUY PILLS"
+                  class="purchase-status" />
+
+    </ui:VisualElement>
+
+</ui:UXML>

@@ -31,4 +31,30 @@
 
     </ui:VisualElement>
 
+    <ui:VisualElement name="boost-banner"
+                    class="boost-banner">
+
+        <ui:VisualElement class="separator" />
+
+        <ui:VisualElement class="line">
+
+            <ui:Label name="boost-multiplier"
+                    text="BOOST x10"
+                    class="boost-label" />
+
+            <ui:Label name="boost-timer"
+                    text="12 s"
+                    class="boost-label" />
+
+        </ui:VisualElement>
+
+        <ui:VisualElement class="progress-track">
+
+            <ui:VisualElement name="boost-fill"
+                            class="progress-fill boost-fill" />
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
 </ui:UXML>

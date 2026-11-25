@@ -141,3 +141,53 @@
 
     -unity-text-align: middle-center;
 }
+
+.offer-timer {
+    font-size: 18px;
+    color: #e27969;
+    -unity-font-style: bold;
+}
+
+.offer-fill {
+    background-color: #e27969;
+}
+
+.purchase-status {
+    margin-top: 10px;
+    padding: 10px;
+
+    background-color: #776039;
+
+    border-width: 2px;
+    border-color: #a28b5c;
+
+    font-size: 20px;
+    color: #ead8b3;
+
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+.purchase-unavailable {
+    background-color: #443633;
+    color: #e27969;
+}
+
+.boost-banner {
+    display: none;
+    margin-top: 12px;
+}
+
+.boost-active {
+    display: flex;
+}
+
+.boost-label {
+    font-size: 18px;
+    color: #e5ca7d;
+    -unity-font-style: bold;
+}
+
+.boost-fill {
+    background-color: #e5ca7d;
+}

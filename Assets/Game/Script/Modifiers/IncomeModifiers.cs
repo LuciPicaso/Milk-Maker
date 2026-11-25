@@ -9,6 +9,8 @@ namespace MilkMaker.Modifiers
     {
         [SerializeField] private UpgradeService _upgrades;
 
+        public float GlobalBoostDuration { get; private set; }
+
         private double _globalBoostMultiplier = 1d;
         private double _globalBoostExpireTime;
         private bool _isPurchasingGlobalBoost;
@@ -124,6 +126,9 @@ namespace MilkMaker.Modifiers
                     return false;
 
                 _globalBoostMultiplier = multiplier;
+                
+                GlobalBoostDuration = duration;
+
                 _globalBoostExpireTime =
                     Time.timeAsDouble + duration;
 
@@ -133,6 +138,7 @@ namespace MilkMaker.Modifiers
             {
                 _isPurchasingGlobalBoost = false;
             }
+            
         }
 
         public double GetClickPower()
