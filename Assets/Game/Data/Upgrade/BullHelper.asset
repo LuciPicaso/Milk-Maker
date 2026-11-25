@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Upgrades.UpgradeProfile
   _displayName: BullHelper
   _type: 1
-  _basePrice: 100
-  _priceGrowth: 1.15
-  _maxLevel: 100
+  _basePrice: 30
+  _priceGrowth: 1.5
+  _maxLevel: 10
   _valuePerLevel: 10
-  _milestoneStep: 10
+  _milestoneStep: 5
   _milestoneMultiplier: 2
   _qualityMultipliers:
   - 5

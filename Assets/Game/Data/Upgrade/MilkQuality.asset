@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Upgrades.UpgradeProfile
   _displayName: MilkQuality
   _type: 2
-  _basePrice: 50000
+  _basePrice: 10000
   _priceGrowth: 15
-  _maxLevel: 100
+  _maxLevel: 3
   _valuePerLevel: 0
   _milestoneStep: 10
   _milestoneMultiplier: 2

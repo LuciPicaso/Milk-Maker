@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Upgrades.UpgradeProfile
   _displayName: MilkingMachine
   _type: 1
-  _basePrice: 2500
-  _priceGrowth: 1.18
-  _maxLevel: 100
-  _valuePerLevel: 350
-  _milestoneStep: 10
-  _milestoneMultiplier: 2
+  _basePrice: 300
+  _priceGrowth: 1.4
+  _maxLevel: 30
+  _valuePerLevel: 150
+  _milestoneStep: 5
+  _milestoneMultiplier: 4
   _qualityMultipliers:
   - 5
   - 25

@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cow
       objectReference: {fileID: 0}
+    - target: {fileID: 5050239576623714850, guid: 177b77eb95914f44daf61dff302e56de, type: 3}
+      propertyPath: _debug
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -981,7 +985,7 @@ Transform:
   m_GameObject: {fileID: 180820584}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.70504516, z: -0, w: 0.7091624}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.304, y: 0, z: 1.315}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9499,7 +9503,7 @@ MonoBehaviour:
   _modifiers: {fileID: 2106861457}
   _profile: {fileID: 11400000, guid: d4da09ef9ca65c843b05e4df59cc8c2b, type: 2}
   _offerVisual: {fileID: 1499665115}
-  _debug: 1
+  _debug: 0
 --- !u!23 &1909059175
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10915,6 +10919,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6461873879369309099, guid: a4ab9d9fc40354740b9e0cc59174638a, type: 3}
+      propertyPath: _debug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6461873879369309099, guid: a4ab9d9fc40354740b9e0cc59174638a, type: 3}
       propertyPath: _holder
       value: 
       objectReference: {fileID: 6903757904468829267}
@@ -10935,6 +10943,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2899331998391412046, guid: 835275876342ebb4884a56051a42bc6a, type: 3}
+      propertyPath: _debug
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2899331998391412046, guid: 835275876342ebb4884a56051a42bc6a, type: 3}
       propertyPath: _economy
       value: 

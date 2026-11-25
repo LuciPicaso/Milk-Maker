@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Upgrades.UpgradeProfile
   _displayName: Bucket
   _type: 4
-  _basePrice: 25
+  _basePrice: 15
   _priceGrowth: 2.5
-  _maxLevel: 40
-  _valuePerLevel: 2
+  _maxLevel: 8
+  _valuePerLevel: 3
   _milestoneStep: 0
   _milestoneMultiplier: 1
   _qualityMultipliers: []

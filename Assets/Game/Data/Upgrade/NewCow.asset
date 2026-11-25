@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Upgrades.UpgradeProfile
   _displayName: NewCow
   _type: 5
-  _basePrice: 100000
-  _priceGrowth: 1.2
+  _basePrice: 3000
+  _priceGrowth: 8
   _maxLevel: 7
-  _valuePerLevel: 1500000
+  _valuePerLevel: 0
   _milestoneStep: 10
   _milestoneMultiplier: 2
   _qualityMultipliers: []

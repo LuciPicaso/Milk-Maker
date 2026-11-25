@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EconomyProfile
   m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Economy.EconomyProfile
   _startingMilk: 0
-  _baseClickPower: 1
-  _targetMilk: 5
+  _baseClickPower: 2
+  _targetMilk: 1e+18

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Upgrades.UpgradeProfile
   _displayName: BlackHole
   _type: 3
-  _basePrice: 100000000000000
-  _priceGrowth: 4
-  _maxLevel: 100
-  _valuePerLevel: 5
+  _basePrice: 10000000000000
+  _priceGrowth: 5
+  _maxLevel: 5
+  _valuePerLevel: 3
   _milestoneStep: 10
   _milestoneMultiplier: 2
   _qualityMultipliers:
