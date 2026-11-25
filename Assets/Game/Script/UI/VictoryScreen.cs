@@ -15,6 +15,11 @@ namespace MilkMaker.UI
         [Header("Gameplay Behaviours")]
         [SerializeField] private Behaviour[] _disableOnVictory;
 
+        [Header("Scenes")]
+        [SerializeField] private string _mainMenuScene = "MainMenu";
+
+        private Button _menuButton;
+
         private VisualElement _screen;
         private Label _finalBalance;
 
@@ -46,6 +51,8 @@ namespace MilkMaker.UI
             _restartButton =
                 root?.Q<Button>("restart-button");
 
+            _menuButton = root?.Q<Button>("menu-button");
+
             _exitButton =
                 root?.Q<Button>("exit-button");
 
@@ -53,6 +60,7 @@ namespace MilkMaker.UI
                 _screen == null ||
                 _finalBalance == null ||
                 _restartButton == null ||
+                _menuButton == null ||
                 _exitButton == null)
             {
                 Debug.LogError(
@@ -66,6 +74,7 @@ namespace MilkMaker.UI
             _screen.style.display = DisplayStyle.None;
 
             _restartButton.clicked += Restart;
+            _menuButton.clicked += ReturnToMenu;
             _exitButton.clicked += Exit;
 
             _economy.OnBalanceChanged += OnBalanceChanged;
@@ -136,6 +145,27 @@ namespace MilkMaker.UI
                 SceneManager.GetActiveScene().buildIndex);
         }
 
+        private void ReturnToMenu()
+        {
+            if (!_hasWon || _isLeaving)
+                return;
+
+            if (!Application.CanStreamedLevelBeLoaded(_mainMenuScene))
+            {
+                Debug.LogError(
+                    $"[VictoryScreen] Scene not found: {_mainMenuScene}",
+                    this);
+
+                return;
+            }
+
+            _isLeaving = true;
+
+            Time.timeScale = 1f;
+
+            SceneManager.LoadScene(_mainMenuScene);
+        }
+
         private void Exit()
         {
             if (!_hasWon || _isLeaving)
@@ -162,6 +192,9 @@ namespace MilkMaker.UI
 
             if (_restartButton != null)
                 _restartButton.clicked -= Restart;
+
+            if (_menuButton != null)
+                _menuButton.clicked -= ReturnToMenu;
 
             if (_exitButton != null)
                 _exitButton.clicked -= Exit;

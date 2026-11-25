@@ -37,6 +37,10 @@
                        text="PLAY AGAIN"
                        class="menu-button primary-button" />
 
+            <ui:Button name="menu-button"
+                        text="MAIN MENU"
+                        class="menu-button" />
+
             <ui:Button name="exit-button"
                        text="EXIT GAME"
                        class="menu-button" />

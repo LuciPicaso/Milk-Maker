@@ -1,0 +1,100 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+
+    <Style src="../Victory/VictoryScreen.uss" />
+
+    <ui:VisualElement class="victory-screen"
+                      style="display: flex;">
+
+        <ui:VisualElement name="main-page"
+                          class="victory-panel">
+
+            <ui:Label text="COW MAFIA"
+                      class="victory-title" />
+
+            <ui:Label text="1 QUINTILLION DEBT"
+                      class="game-title" />
+
+            <ui:Button name="play-button"
+                       text="NEW GAME"
+                       class="menu-button primary-button" />
+
+            <ui:Button name="help-button"
+                       text="HOW TO PLAY"
+                       class="menu-button" />
+
+            <ui:Button name="exit-button"
+                       text="EXIT GAME"
+                       class="menu-button" />
+
+            <ui:Label text="COW MAFIA INDUSTRIES"
+                      class="footer" />
+
+        </ui:VisualElement>
+
+        <ui:VisualElement name="help-page"
+                          class="victory-panel"
+                          style="display: none; width: 700px;">
+
+            <ui:Label text="HOW TO PLAY"
+                      class="victory-title" />
+
+            <ui:VisualElement class="result">
+
+                <ui:Label text="CONTROLS"
+                          class="game-title" />
+
+                <ui:Label text="WASD - Move"
+                          class="description" />
+
+                <ui:Label text="Mouse - Look"
+                          class="description" />
+
+                <ui:Label text="Left Mouse Button - Interact"
+                          class="description" />
+
+            </ui:VisualElement>
+
+            <ui:VisualElement class="result">
+
+                <ui:Label text="YOUR MISSION"
+                          class="game-title" />
+
+                <ui:Label text="1. Pick up a bucket and place it under a cow."
+                          class="description"
+                          style="white-space: normal;" />
+
+                <ui:Label text="2. Click the udder to collect milk."
+                          class="description"
+                          style="white-space: normal;" />
+
+                <ui:Label text="3. Carry the bucket to the milk can and pour."
+                          class="description"
+                          style="white-space: normal;" />
+
+                <ui:Label text="4. Buy upgrades to automate production."
+                          class="description"
+                          style="white-space: normal;" />
+
+                <ui:Label text="5. Slap automated cows to boost income."
+                          class="description"
+                          style="white-space: normal;" />
+
+                <ui:Label text="6. Buy special pills from the Pig Dealer."
+                          class="description"
+                          style="white-space: normal;" />
+
+                <ui:Label text="7. Reach 1 quintillion liters to clear your debt."
+                          class="description"
+                          style="white-space: normal;" />
+
+            </ui:VisualElement>
+
+            <ui:Button name="back-button"
+                       text="BACK"
+                       class="menu-button" />
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

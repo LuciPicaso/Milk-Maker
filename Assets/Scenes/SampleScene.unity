@@ -3017,6 +3017,7 @@ MonoBehaviour:
   - {fileID: 1909059174}
   - {fileID: 993734134}
   - {fileID: 1728124053}
+  - {fileID: 1781446135}
   _debug: 0
 --- !u!114 &547279570
 MonoBehaviour:
@@ -3033,7 +3034,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: e7ea6a9ed9c6cd74b81519fe7185243c, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: f3e1b65c69248b4458cdcc28362009e8, type: 3}
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Position: 0
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
