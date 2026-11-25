@@ -1,0 +1,51 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+
+    <Style src="VictoryScreen.uss" />
+
+    <ui:VisualElement name="victory-screen"
+                      class="victory-screen">
+
+        <ui:VisualElement class="victory-panel">
+
+            <ui:Label text="C O W  M A F I A"
+                      class="game-title" />
+
+            <ui:Label text="DEBT CLEARED"
+                      class="victory-title" />
+
+            <ui:Label text="The Mafia has been paid."
+                      class="description" />
+
+            <ui:Label text="You are finally free."
+                      class="description" />
+
+            <ui:VisualElement class="result">
+
+                <ui:Label text="FINAL BALANCE"
+                          class="caption" />
+
+                <ui:Label name="final-balance"
+                          text="0 L"
+                          class="final-balance" />
+
+                <ui:Label text="TARGET REACHED — 100%"
+                          class="caption" />
+
+            </ui:VisualElement>
+
+            <ui:Button name="restart-button"
+                       text="PLAY AGAIN"
+                       class="menu-button primary-button" />
+
+            <ui:Button name="exit-button"
+                       text="EXIT GAME"
+                       class="menu-button" />
+
+            <ui:Label text="COW MAFIA INDUSTRIES"
+                      class="footer" />
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

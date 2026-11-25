@@ -2965,6 +2965,82 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1268285679}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &547279567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 547279568}
+  - component: {fileID: 547279570}
+  - component: {fileID: 547279569}
+  m_Layer: 0
+  m_Name: Victory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &547279568
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547279567}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6903757904468829268}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &547279569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547279567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019fbd3d4872b9c45af28b9c66b707d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.UI.VictoryScreen
+  _economy: {fileID: 1944014007}
+  _disableOnVictory:
+  - {fileID: 6903757904468829269}
+  - {fileID: 1728124053}
+  - {fileID: 1909059174}
+  - {fileID: 993734134}
+  - {fileID: 1728124053}
+  _debug: 0
+--- !u!114 &547279570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547279567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: e7ea6a9ed9c6cd74b81519fe7185243c, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: f3e1b65c69248b4458cdcc28362009e8, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
 --- !u!1 &563109952
 GameObject:
   m_ObjectHideFlags: 0
@@ -8357,6 +8433,17 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1728124053 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2778493068644181302, guid: 2297b730e27bc4b4ca0cac5031e84669, type: 3}
+  m_PrefabInstance: {fileID: 6903757904468829266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b121fc1d3c31f544a8cda4fb2f3f5524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Interaction.PointerInteractor
 --- !u!1 &1751063946
 GameObject:
   m_ObjectHideFlags: 0
@@ -10860,6 +10947,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 392606144267861949, guid: 2297b730e27bc4b4ca0cac5031e84669, type: 3}
       insertIndex: -1
       addedObject: {fileID: 211285901}
+    - targetCorrespondingSourceObject: {fileID: 392606144267861949, guid: 2297b730e27bc4b4ca0cac5031e84669, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 547279568}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2297b730e27bc4b4ca0cac5031e84669, type: 3}
 --- !u!114 &6903757904468829267 stripped
@@ -10878,6 +10968,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 392606144267861949, guid: 2297b730e27bc4b4ca0cac5031e84669, type: 3}
   m_PrefabInstance: {fileID: 6903757904468829266}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6903757904468829269 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8968092254605413639, guid: 2297b730e27bc4b4ca0cac5031e84669, type: 3}
+  m_PrefabInstance: {fileID: 6903757904468829266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a53c93d0f65c1d4d9222aaa47c8aaf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Player.FirstPersonController
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

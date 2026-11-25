@@ -1,0 +1,123 @@
+.victory-screen {
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(10, 15, 8, 0.96);
+}
+
+.victory-panel {
+    width: 540px;
+
+    padding: 32px;
+
+    background-color: #121b10;
+
+    border-width: 4px;
+    border-color: #56634c;
+}
+
+.game-title {
+    font-size: 20px;
+    color: #88937f;
+
+    margin-bottom: 24px;
+
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+}
+
+.victory-title {
+    font-size: 48px;
+    color: #b5ec91;
+
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+
+    margin-bottom: 12px;
+}
+
+.description {
+    font-size: 20px;
+    color: #d7dfd0;
+
+    -unity-text-align: middle-center;
+}
+
+.result {
+    padding: 20px;
+
+    margin-top: 24px;
+    margin-bottom: 24px;
+
+    background-color: #1b2517;
+
+    border-width: 2px;
+    border-color: #56634c;
+}
+
+.caption {
+    font-size: 15px;
+    color: #9ba794;
+
+    -unity-text-align: middle-center;
+}
+
+.final-balance {
+    font-size: 42px;
+    color: #b5ec91;
+
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+.menu-button {
+    height: 54px;
+
+    margin-top: 8px;
+
+    background-color: #292c27;
+
+    border-width: 2px;
+    border-color: #596052;
+
+    color: #d7dfd0;
+    font-size: 22px;
+
+    -unity-font-style: bold;
+}
+
+.primary-button {
+    background-color: #776039;
+    border-color: #a28b5c;
+
+    color: #ead8b3;
+}
+
+.menu-button:hover {
+    background-color: #56634c;
+    border-color: #b5ec91;
+
+    color: #ffffff;
+}
+
+.menu-button:active {
+    background-color: #303b28;
+}
+
+.footer {
+    font-size: 12px;
+    color: #88937f;
+
+    margin-top: 20px;
+
+    -unity-text-align: middle-center;
+}
