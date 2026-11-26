@@ -10623,6 +10623,8 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 7572919868493367925, guid: 9cdfe2019cd399c40b6f21c381582903, type: 2}
     value: {fileID: 2044329149}
+  - key: {fileID: -4583978051647473613, guid: 9cdfe2019cd399c40b6f21c381582903, type: 2}
+    value: {fileID: 1594774698}
   m_ExposedReferences:
     m_References:
     - 17dcd7b3b87d14d408d5bd4212a545a9: {fileID: 317344036}
@@ -10634,6 +10636,7 @@ PlayableDirector:
     - 7340e13c64165474db0845e7a7b75435: {fileID: 2044329145}
     - 7cc08ed5baf383040a738cb36c4adea4: {fileID: 522653368}
     - 6cb72e2b9d1b9704a8e8cf27db6a70f2: {fileID: 1596399048}
+    - 3f02a3a80886741489637ee7ac5ee1c6: {fileID: 1594774696}
 --- !u!4 &1299968528
 Transform:
   m_ObjectHideFlags: 0
@@ -12226,6 +12229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1594774697}
+  - component: {fileID: 1594774698}
   m_Layer: 0
   m_Name: CarRoot
   m_TagString: Untagged
@@ -12259,6 +12263,28 @@ Transform:
   - {fileID: 148753456}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1594774698
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594774696}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1596399046
 GameObject:
   m_ObjectHideFlags: 0
