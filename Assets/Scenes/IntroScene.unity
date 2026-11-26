@@ -10589,6 +10589,66 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275344696}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1299968526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1299968528}
+  - component: {fileID: 1299968527}
+  m_Layer: 0
+  m_Name: IntroDirector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!320 &1299968527
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299968526}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 9cdfe2019cd399c40b6f21c381582903, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 0
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 7572919868493367925, guid: 9cdfe2019cd399c40b6f21c381582903, type: 2}
+    value: {fileID: 2044329149}
+  m_ExposedReferences:
+    m_References:
+    - 17dcd7b3b87d14d408d5bd4212a545a9: {fileID: 317344036}
+    - cf193d3caee003043a5c189ed6fcfdd4: {fileID: 522653368}
+    - a367209357353654bbfb2e8376a87ec5: {fileID: 1596399048}
+    - 520c943806db23844bd9e76dbdf4fe3a: {fileID: 317344036}
+    - 47b285867c0f0514abeda0ea32f55063: {fileID: 1212038997}
+    - f2c4dee30ff931447b2fb19b84d52239: {fileID: 2044329145}
+    - 7340e13c64165474db0845e7a7b75435: {fileID: 2044329145}
+    - 7cc08ed5baf383040a738cb36c4adea4: {fileID: 522653368}
+    - 6cb72e2b9d1b9704a8e8cf27db6a70f2: {fileID: 1596399048}
+--- !u!4 &1299968528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299968526}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.501, y: 1.47022, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1305018805
 GameObject:
   m_ObjectHideFlags: 0
@@ -15226,7 +15286,7 @@ MonoBehaviour:
     Enabled: 0
     DefaultMode: 2
   DefaultBlend:
-    Style: 1
+    Style: 0
     Time: 2
     CustomCurve:
       serializedVersion: 2
@@ -16183,3 +16243,4 @@ SceneRoots:
   - {fileID: 1072914329}
   - {fileID: 1906136365}
   - {fileID: 1594774697}
+  - {fileID: 1299968528}
