@@ -37,7 +37,8 @@ namespace MilkMaker.Cow
         public void Milk()
         {
             if (_modifiers == null ||
-                _bucketSocket == null)
+                _bucketSocket == null ||
+                !_bucketSocket.AllowsManualMilking)
             {
                 return;
             }
@@ -95,6 +96,7 @@ namespace MilkMaker.Cow
             ItemHolder holder,
             IncomeModifiers modifiers,
             ModifierProfile slapProfile,
+            UpgradeService upgrades,
             int stallId)
         {
             _modifiers = modifiers;
@@ -102,7 +104,12 @@ namespace MilkMaker.Cow
             _stallId = stallId;
 
             if (_bucketSocket != null)
-                _bucketSocket.BindHolder(holder);
+            {
+                _bucketSocket.BindHolder(
+                    holder,
+                    upgrades,
+                    stallId);
+            }
         }
     }
 }

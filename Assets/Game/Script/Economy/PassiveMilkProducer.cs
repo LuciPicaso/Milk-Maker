@@ -25,23 +25,8 @@ namespace MilkMaker.Economy
 
         public bool IsAutomaticDeliveryUnlocked(int stallId)
         {
-            if (_upgrades == null ||
-                _automaticDeliveryUnlocks == null)
-            {
-                return false;
-            }
-
-            foreach (UpgradeProfile profile
-                     in _automaticDeliveryUnlocks)
-            {
-                if (profile != null &&
-                    _upgrades.GetLevel(profile, stallId) > 0)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return _upgrades != null &&
+                _upgrades.IsAutomaticDeliveryUnlocked(stallId);
         }
 
         private void Update()

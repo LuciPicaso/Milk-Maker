@@ -12,6 +12,10 @@ namespace MilkMaker.Upgrades
         public const int MaxStalls = 8;
         public const int GlobalId = -1;
 
+        [Header("Automation Unlocks")]
+        [SerializeField]
+        private UpgradeProfile[] _automaticDeliveryUnlocks;
+
         [Header("Presentation")]
         [SerializeField] private UnityEvent _onPurchased = new();
 
@@ -276,6 +280,26 @@ namespace MilkMaker.Upgrades
                         break;
                 }
             }
+        }
+
+        public bool IsAutomaticDeliveryUnlocked(int stallId)
+        {
+            if (!IsStallUnlocked(stallId) ||
+                _automaticDeliveryUnlocks == null)
+            {
+                return false;
+            }
+
+            foreach (UpgradeProfile profile in _automaticDeliveryUnlocks)
+            {
+                if (profile != null &&
+                    GetLevel(profile, stallId) > 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

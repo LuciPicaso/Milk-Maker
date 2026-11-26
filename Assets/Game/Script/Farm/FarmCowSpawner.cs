@@ -111,6 +111,7 @@ namespace MilkMaker.Farm
                     _holder,
                     _modifiers,
                     _slapProfile,
+                    _upgrades,
                     i);
 
 #if UNITY_EDITOR

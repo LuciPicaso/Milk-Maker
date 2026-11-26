@@ -8121,6 +8121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76100087b3e8044188f77b66f323162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MilkMaker.Upgrades.UpgradeService
+  _automaticDeliveryUnlocks:
+  - {fileID: 11400000, guid: 0d79f4ca03182f049ad3bf62c0fb93e1, type: 2}
+  - {fileID: 11400000, guid: 965b65616e3df6847936b92e277f6c79, type: 2}
   _onPurchased:
     m_PersistentCalls:
       m_Calls:
@@ -10299,22 +10302,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1458556660617473382, guid: 22ec6cc0799a70b439c9da07afdd7cbd, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: ad85e5dd5b4fc294e9ae0bb958fb737a, type: 2}
     - target: {fileID: 1973059151561139947, guid: 22ec6cc0799a70b439c9da07afdd7cbd, type: 3}
       propertyPath: m_Name
       value: PigDealer
       objectReference: {fileID: 0}
-    - target: {fileID: 4649386913351670200, guid: 22ec6cc0799a70b439c9da07afdd7cbd, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: ad85e5dd5b4fc294e9ae0bb958fb737a, type: 2}
-    - target: {fileID: 7513172917644874739, guid: 22ec6cc0799a70b439c9da07afdd7cbd, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: ad85e5dd5b4fc294e9ae0bb958fb737a, type: 2}
     - target: {fileID: 8897192598163180029, guid: 22ec6cc0799a70b439c9da07afdd7cbd, type: 3}
       propertyPath: _economy
       value: 

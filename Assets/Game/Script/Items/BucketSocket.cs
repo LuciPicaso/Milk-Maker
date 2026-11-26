@@ -1,4 +1,5 @@
 using UnityEngine;
+using MilkMaker.Upgrades;
 
 namespace MilkMaker.Items
 {
@@ -9,6 +10,14 @@ namespace MilkMaker.Items
         [SerializeField] private Transform _anchor;
 
         public Bucket OccupiedBucket { get; private set; }
+
+        private UpgradeService _upgrades;
+        private int _stallId = -1;
+
+        public bool AllowsManualMilking =>
+            _upgrades != null &&
+            _upgrades.IsStallUnlocked(_stallId) &&
+            !_upgrades.IsAutomaticDeliveryUnlocked(_stallId);
 
         public bool IsOccupied =>
             OccupiedBucket != null;
@@ -32,7 +41,8 @@ namespace MilkMaker.Items
             if (_anchor == null ||
                 bucket == null ||
                 IsOccupied ||
-                !bucket.IsHeld)
+                !bucket.IsHeld ||
+                !AllowsManualMilking)
             {
                 return false;
             }
@@ -57,9 +67,14 @@ namespace MilkMaker.Items
             return true;
         }
 
-        public void BindHolder(ItemHolder holder)
+        public void BindHolder(
+            ItemHolder holder,
+            UpgradeService upgrades,
+            int stallId)
         {
             _holder = holder;
+            _upgrades = upgrades;
+            _stallId = stallId;
         }
     }
 }
