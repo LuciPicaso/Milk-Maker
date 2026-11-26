@@ -6544,6 +6544,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 720143545}
+  - component: {fileID: 720143546}
   m_Layer: 0
   m_Name: BouncerRoot
   m_TagString: Untagged
@@ -6568,6 +6569,28 @@ Transform:
   - {fileID: 1764560330}
   m_Father: {fileID: 1594774697}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &720143546
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720143544}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &758308892
 GameObject:
   m_ObjectHideFlags: 0
@@ -10625,6 +10648,8 @@ PlayableDirector:
     value: {fileID: 2044329149}
   - key: {fileID: -4583978051647473613, guid: 9cdfe2019cd399c40b6f21c381582903, type: 2}
     value: {fileID: 1594774698}
+  - key: {fileID: -1753155293119348423, guid: 9cdfe2019cd399c40b6f21c381582903, type: 2}
+    value: {fileID: 720143546}
   m_ExposedReferences:
     m_References:
     - 17dcd7b3b87d14d408d5bd4212a545a9: {fileID: 317344036}
